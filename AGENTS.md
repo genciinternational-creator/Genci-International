@@ -35,4 +35,4 @@ Site da Genci, serviço de criação de conteúdo publicitário com IA voltado a
 - Rastreamento de anúncios opcional: variáveis `PUBLIC_GA4_ID` e `PUBLIC_META_PIXEL_ID` no Cloudflare. Vazias = nada carrega.
 - Contrato: Visual Growth mensal, sem fidelidade, cancela antes da próxima cobrança, cliente fica com os vídeos. Amostra grátis não tem revisões; planos têm 3 rodadas por vídeo.
 - Bloco "Who edits your videos" (`src/components/Founder.astro`): Guilherme Camargo, foto em `public/brand/founder.webp`, frase "Care in every detail."
-- Neste PC, o Smart App Control do Windows bloqueia os módulos nativos do Astro; o build local precisa de outro caminho (ex.: WSL). O Cloudflare compila normalmente.
+- Neste PC, o Smart App Control do Windows bloqueia os módulos nativos do Astro. Depois de qualquer `npm install`, rode `npm run fix:windows` (versões WebAssembly, sem salvar dependência); aí `npm run dev` e `npm run build` funcionam. O Cloudflare compila normalmente.

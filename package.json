@@ -10,7 +10,8 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "fix:windows": "npm i --no-save --force --no-audit --no-fund @astrojs/compiler-binding-wasm32-wasi@0.5.1 @rolldown/binding-wasm32-wasi@1.2.13 @bruits/satteri-wasm32-wasi@0.10.5"
   },
   "dependencies": {
     "astro": "^7.3.8",

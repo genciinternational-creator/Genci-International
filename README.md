@@ -13,8 +13,9 @@ npm run build    # gera a versão final em dist/
 ```
 
 > Neste computador, o Controle Inteligente de Aplicativos do Windows (Smart App Control) bloqueia os
-> módulos nativos do Astro, então `npm run dev` e `npm run build` falham aqui. Isso não afeta a publicação:
-> o Cloudflare compila em Linux.
+> módulos nativos do Astro. Solução: depois de qualquer `npm install`, rode uma vez `npm run fix:windows`
+> (instala versões WebAssembly desses módulos só nesta máquina, sem mudar o `package.json` de dependências).
+> Isso não afeta a publicação: o Cloudflare compila em Linux.
 
 ## Publicar (GitHub + Cloudflare Pages)
 

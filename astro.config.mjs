@@ -14,10 +14,12 @@ const dropProvenanceNotes = {
   name: 'genci:drop-provenance-notes',
   hooks: {
     'astro:build:done': ({ dir }) => {
-      const videos = path.join(fileURLToPath(dir), 'videos');
-      if (!fs.existsSync(videos)) return;
-      for (const file of fs.readdirSync(videos)) {
-        if (file.endsWith('.json')) fs.rmSync(path.join(videos, file));
+      for (const folder of ['videos', 'brand']) {
+        const target = path.join(fileURLToPath(dir), folder);
+        if (!fs.existsSync(target)) continue;
+        for (const file of fs.readdirSync(target)) {
+          if (file.endsWith('.webp.json')) fs.rmSync(path.join(target, file));
+        }
       }
     },
   },

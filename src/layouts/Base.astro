@@ -1,7 +1,7 @@
 ---
 import '../styles/global.css';
 import Analytics from '../components/Analytics.astro';
-import { contact, faq } from '../data/site.js';
+import { contact, faq, founder } from '../data/site.js';
 
 interface Props {
   title: string;
@@ -29,6 +29,7 @@ const graph = [
     telephone: contact.phoneSchema,
     email: contact.email,
     areaServed: { '@type': 'Place', name: contact.areaServed },
+    ...(founder.name && { founder: { '@type': 'Person', name: founder.name, jobTitle: founder.role } }),
     ...(site && { url: site.href, logo, image: ogImage }),
   },
   ...(site ? [{ '@type': 'WebSite', '@id': new URL('/#website', site).href, name: 'GENCI', url: site.href, publisher: { '@id': businessId } }] : []),

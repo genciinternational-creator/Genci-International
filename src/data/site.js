@@ -13,13 +13,13 @@ export const contact = {
   areaServed: 'San Francisco Bay Area',
 };
 
-// Shown in the "Who edits your videos" block once both name and photo are filled in.
-// photo: a file in /public/brand/, e.g. '/brand/founder.webp' (square, at least 600x600).
+// "Who edits your videos" block. It renders only while both name and photo are set.
+// photo: a square file in /public/brand/ (800x800 WebP).
 export const founder = {
-  name: null,
+  name: 'Guilherme Camargo',
   role: 'Founder, GENCI',
-  photo: null,
-  bio: null,
+  photo: '/brand/founder.webp',
+  bio: 'Care in every detail.',
 };
 
 const clip = (file, title, duration) => ({ file, title, duration });

@@ -36,15 +36,15 @@ A pasta `video-sources/` (originais em 4K) e o arquivo `.env` ficam fora do GitH
    - Environment variables: `NODE_VERSION` = `22.12.0`
 5. **Save and Deploy**. Em 1 a 2 minutos o site fica no ar em um endereço `*.pages.dev`.
 
-### 3. Domínio
-1. Registre `genciinternational.com` em **Domain Registration › Register Domains** no Cloudflare (ou, se comprou em outro lugar, adicione o domínio ao Cloudflare e troque os nameservers no registrador).
-2. No projeto do Pages: **Custom domains › Set up a custom domain** › `www.genciinternational.com`. O Cloudflare cria o DNS sozinho.
-3. Para quem digitar sem "www": em **Rules › Redirect Rules**, use o modelo **Redirect from root to WWW** (a raiz precisa de um registro DNS com proxy, o modelo explica).
+### 3. Domínio (genciinternational.com já registrado)
+1. No Cloudflare: **Add a domain** › `genciinternational.com` › plano **Free**.
+2. **Antes de continuar, confira os registros DNS que o Cloudflare importou.** Os registros **MX** (e os TXT de SPF/DKIM) do e-mail `contact@genciinternational.com` precisam estar na lista, iguais aos do provedor atual. Se faltar algum, copie do painel do registrador. Sem eles, o e-mail para de funcionar.
+3. No site onde o domínio foi comprado, troque os **nameservers** pelos dois que o Cloudflare mostrar. A troca leva de minutos a algumas horas.
+4. No projeto do Pages: **Custom domains › Set up a custom domain** › `www.genciinternational.com`. O Cloudflare cria o DNS do site sozinho.
+5. Para quem digitar sem "www": em **Rules › Redirect Rules**, use o modelo **Redirect from root to WWW** (a raiz precisa de um registro DNS com proxy, o modelo explica).
 
-### 4. E-mail contact@genciinternational.com
-1. No domínio, abra **Email › Email Routing** e ative.
-2. Crie o endereço `contact@genciinternational.com` e encaminhe para o seu Gmail (confirme o e-mail de verificação).
-3. Para **responder** como contact@, use Google Workspace ou Zoho Mail; o Email Routing só recebe.
+### 4. E-mail
+O `contact@genciinternational.com` já existe. Depois da troca de nameservers, mande um e-mail de teste para ele e responda de volta para confirmar que recebimento e envio continuam funcionando.
 
 ### 5. Formulário (Formspree)
 - O formulário envia para `https://formspree.io/f/xppqrlgw` (pode ser trocado pela variável `PUBLIC_FORMSPREE_ENDPOINT`).

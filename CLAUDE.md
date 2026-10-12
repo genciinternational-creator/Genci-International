@@ -30,9 +30,9 @@ Site da Genci, serviço de criação de conteúdo publicitário com IA voltado a
 - Vídeos originais em 4K ficam em `video-sources/` (fora do build); versões web em `public/videos/`.
 - Domínio: https://www.genciinternational.com (definido em `astro.config.mjs`; `SITE_URL` só substitui para testes).
 - Fonte de títulos: TeX Gyre Adventor (escolha final, licença GUST em `public/fonts/licenses/`).
-- E-mail comercial: contact@genciinternational.com (criado no Cloudflare Email Routing).
+- E-mail comercial: contact@genciinternational.com (já existe; ao mover o DNS para o Cloudflare, preservar os registros MX).
 - Publicação: GitHub + Cloudflare Pages (build `npm run build`, saída `dist`, variável `NODE_VERSION=22.12.0`). Passo a passo no `README.md`.
 - Rastreamento de anúncios opcional: variáveis `PUBLIC_GA4_ID` e `PUBLIC_META_PIXEL_ID` no Cloudflare. Vazias = nada carrega.
 - Contrato: Visual Growth mensal, sem fidelidade, cancela antes da próxima cobrança, cliente fica com os vídeos. Amostra grátis não tem revisões; planos têm 3 rodadas por vídeo.
-- Bloco "Who edits your videos" (`src/components/Founder.astro`) aparece quando `founder.name` e `founder.photo` forem preenchidos em `src/data/site.js`.
+- Bloco "Who edits your videos" (`src/components/Founder.astro`): Guilherme Camargo, foto em `public/brand/founder.webp`, frase "Care in every detail."
 - Neste PC, o Smart App Control do Windows bloqueia os módulos nativos do Astro; o build local precisa de outro caminho (ex.: WSL). O Cloudflare compila normalmente.

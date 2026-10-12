@@ -37,6 +37,9 @@ A pasta `video-sources/` (originais em 4K) e o arquivo `.env` ficam fora do GitH
 5. **Save and Deploy**. Em 1 a 2 minutos o site fica no ar em um endereço `*.pages.dev`.
 
 ### 3. Domínio (genciinternational.com já registrado)
+**Caminho mais simples (o e-mail não é tocado):** mantenha o DNS onde está. No projeto do Pages, em **Custom domains › Set up a custom domain**, digite `www.genciinternational.com`; o Cloudflare mostra um registro **CNAME** (`www` › `seu-projeto.pages.dev`). Crie esse CNAME no painel do provedor onde o domínio está e, nesse mesmo painel, encaminhe `genciinternational.com` (sem www) para `https://www.genciinternational.com`. Pronto.
+
+**Caminho completo (DNS no Cloudflare):**
 1. No Cloudflare: **Add a domain** › `genciinternational.com` › plano **Free**.
 2. **Antes de continuar, confira os registros DNS que o Cloudflare importou.** Os registros **MX** (e os TXT de SPF/DKIM) do e-mail `contact@genciinternational.com` precisam estar na lista, iguais aos do provedor atual. Se faltar algum, copie do painel do registrador. Sem eles, o e-mail para de funcionar.
 3. No site onde o domínio foi comprado, troque os **nameservers** pelos dois que o Cloudflare mostrar. A troca leva de minutos a algumas horas.

@@ -1,0 +1,211 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-12T16:06:42.392Z",
+  "title": "Design System: GENCI",
+  "extensions": {
+    "colorMeta": {
+      "sign-ink": {
+        "role": "primary",
+        "displayName": "Sign Ink",
+        "canonical": "#0a0a0a",
+        "tonalRamp": [
+          "#0a0a0a",
+          "#1f1f1f",
+          "#3a3a3a",
+          "#5a5a5a",
+          "#737373",
+          "#a3a3a3",
+          "#d4d4d4",
+          "#f2f2f2"
+        ]
+      },
+      "concourse-white": {
+        "role": "neutral",
+        "displayName": "Concourse White",
+        "canonical": "#ffffff",
+        "tonalRamp": [
+          "#0a0a0a",
+          "#3a3a3a",
+          "#737373",
+          "#a3a3a3",
+          "#d4d4d4",
+          "#e5e5e5",
+          "#f2f2f2",
+          "#ffffff"
+        ]
+      },
+      "platform-gray": {
+        "role": "neutral",
+        "displayName": "Platform Gray",
+        "canonical": "#f2f2f2"
+      },
+      "rule-gray": {
+        "role": "neutral",
+        "displayName": "Rule Gray",
+        "canonical": "#d4d4d4"
+      },
+      "signal-gray": {
+        "role": "neutral",
+        "displayName": "Signal Gray",
+        "canonical": "#737373"
+      },
+      "graphite-frame": {
+        "role": "neutral",
+        "displayName": "Graphite Frame",
+        "canonical": "#3a3a3a"
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "The hero sign only."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "One per section."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Step signs, niche copy line, gate message."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Copy, answers, form help."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Table heads, captions, video meta, form labels."
+      },
+      "numeral": {
+        "displayName": "Numeral",
+        "purpose": "Step, gate and count numbers inside ink squares."
+      }
+    },
+    "shadows": [],
+    "motion": [
+      {
+        "name": "ease-out",
+        "value": "cubic-bezier(0.16, 1, 0.3, 1)",
+        "purpose": "Arrow nudges and hover lifts."
+      },
+      {
+        "name": "split-flap",
+        "value": "rotateX 90deg in 60ms steps, 28ms stagger per cell, final settle 160ms expo.out",
+        "purpose": "Departures board change."
+      },
+      {
+        "name": "reveal",
+        "value": "translateY 28px and opacity, 0.9s expo.out, 70ms stagger",
+        "purpose": "Below-the-fold entrances only; headings rise line by line through a mask."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "tablet",
+        "value": "768px"
+      },
+      {
+        "name": "reels-row",
+        "value": "900px"
+      },
+      {
+        "name": "desktop-grid",
+        "value": "1024px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Sign Button",
+      "kind": "button",
+      "refersTo": "button-sign",
+      "description": "Primary action: ink panel ending in a white arrow square.",
+      "html": "<a class=\"ds-btn\" href=\"#\"><span class=\"ds-btn__t\">Get my free sample edit</span><span class=\"ds-btn__sq\"><svg viewBox=\"0 0 24 24\" width=\"24\" height=\"24\" fill=\"currentColor\"><path d=\"M3.5 10.4h11.1l-4.2-4.2 2.3-2.3 8.1 8.1-8.1 8.1-2.3-2.3 4.2-4.2H3.5z\"/></svg></span></a>",
+      "css": ".ds-btn{display:inline-flex;min-height:56px;border:1px solid #0a0a0a;background:#0a0a0a;color:#fff;font:700 17px/1.15 'GENCI Display','Century Gothic',sans-serif;text-decoration:none}.ds-btn__t{display:flex;align-items:center;padding:12px 20px}.ds-btn__sq{display:grid;place-items:center;width:56px;background:#fff;color:#0a0a0a}.ds-btn__sq svg{transition:transform .35s cubic-bezier(.16,1,.3,1)}.ds-btn:hover .ds-btn__sq svg{transform:translateX(4px)}.ds-btn:focus-visible{outline:3px solid #0a0a0a;outline-offset:3px}"
+    },
+    {
+      "name": "Inverse Sign Button",
+      "kind": "button",
+      "refersTo": "button-sign-inverse",
+      "description": "Action on an ink ground: white panel, ink arrow square.",
+      "html": "<div style=\"background:#0a0a0a;padding:24px\"><a class=\"ds-btn-inv\" href=\"#\"><span class=\"ds-btn-inv__t\">Get my free sample edit</span><span class=\"ds-btn-inv__sq\"><svg viewBox=\"0 0 24 24\" width=\"24\" height=\"24\" fill=\"currentColor\"><path d=\"M3.5 10.4h11.1l-4.2-4.2 2.3-2.3 8.1 8.1-8.1 8.1-2.3-2.3 4.2-4.2H3.5z\"/></svg></span></a></div>",
+      "css": ".ds-btn-inv{display:inline-flex;min-height:56px;border:1px solid #fff;background:#fff;color:#0a0a0a;font:700 17px/1.15 'GENCI Display','Century Gothic',sans-serif;text-decoration:none}.ds-btn-inv__t{display:flex;align-items:center;padding:12px 20px}.ds-btn-inv__sq{display:grid;place-items:center;width:56px;background:#0a0a0a;color:#fff}.ds-btn-inv:hover .ds-btn-inv__sq svg{transform:translateX(4px)}.ds-btn-inv:focus-visible{outline:3px solid #fff;outline-offset:3px}"
+    },
+    {
+      "name": "Field",
+      "kind": "input",
+      "refersTo": "input",
+      "description": "Square white field with an ink stroke and a Syne label.",
+      "html": "<label class=\"ds-lab\" for=\"ds-f\">Mobile number</label><input class=\"ds-in\" id=\"ds-f\" placeholder=\"(510) 555-0123\">",
+      "css": ".ds-lab{display:block;margin-bottom:6px;font:700 13px/1.3 Syne,sans-serif;letter-spacing:.1em;text-transform:uppercase}.ds-in{width:100%;min-height:54px;padding:12px 14px;border:1px solid #0a0a0a;border-radius:0;background:#fff;font:400 17px Outfit,sans-serif}.ds-in::placeholder{color:#737373}.ds-in:hover{background:#f2f2f2}.ds-in:focus-visible{outline:3px solid #0a0a0a;outline-offset:2px}"
+    },
+    {
+      "name": "Departures Board",
+      "kind": "custom",
+      "refersTo": "board-tab",
+      "description": "Signature: split-flap destination and trade toggles.",
+      "html": "<div class=\"ds-board\"><p class=\"ds-now\">Now showing</p><p class=\"ds-flap\"><span>C</span><span>A</span><span>R</span><span>P</span><span>E</span><span>T</span></p><div class=\"ds-tabs\"><button class=\"ds-tab\" aria-pressed=\"true\">Carpet cleaning</button><button class=\"ds-tab\" aria-pressed=\"false\">Construction</button></div></div>",
+      "css": ".ds-board{background:#0a0a0a;color:#fff;padding:20px;border:1px solid #3a3a3a}.ds-now{font:700 12px Syne,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#d4d4d4;margin:0 0 10px}.ds-flap{display:flex;gap:3px;margin:0;font:700 40px/1 'GENCI Display','Century Gothic',sans-serif}.ds-flap span{position:relative;display:grid;place-items:center;width:36px;height:52px;background:#3a3a3a}.ds-flap span::after{content:'';position:absolute;left:0;right:0;top:50%;height:1px;background:#0a0a0a}.ds-tabs{display:flex;gap:8px;margin-top:16px}.ds-tab{min-height:52px;padding:10px 14px;border:1px solid #3a3a3a;background:transparent;color:#fff;font:700 16px 'GENCI Display','Century Gothic',sans-serif}.ds-tab[aria-pressed=true]{background:#fff;color:#0a0a0a;border-color:#fff}.ds-tab:hover{border-color:#fff}.ds-tab:focus-visible{outline:3px solid #fff;outline-offset:3px}"
+    },
+    {
+      "name": "Numeral Square",
+      "kind": "chip",
+      "refersTo": "numeral",
+      "description": "Step and gate numbers: Syne 800 lining figure in an ink square.",
+      "html": "<span class=\"ds-num\">2</span>",
+      "css": ".ds-num{display:inline-grid;place-items:center;width:48px;height:48px;background:#0a0a0a;color:#fff;font:800 24px/1 Syne,sans-serif;font-feature-settings:'lnum' 1,'tnum' 1}"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Overhead Sign",
+    "overview": "The page is a route under overhead signs. Every section is a junction that carries one sign: one message, one arrow, one next step, and the route ends at the gate, which is the free sample edit. The grammar comes from international airport and freeway wayfinding, translated into strict black, white and four grays because the brand pins a monochrome palette. The yellow of an airport panel becomes sign ink.\n\nDensity alternates like a concourse: a dense ink sign, then quiet white floor with ruled tables, then another sign. The type is large and geometric, set in sentence case, one message per line. Video frames hang like concourse monitors, and they are the only place color appears on the page.",
+    "keyCharacteristics": [
+      "Full-bleed ink sign panels on a white ground, framed by a graphite hairline.",
+      "Square corners everywhere; every control ends in a square arrow pictogram.",
+      "Monumental Syne numerals in ink squares mark steps, gates and counts.",
+      "A split-flap departures board as the signature interaction.",
+      "Color only inside 9:16 video monitors."
+    ],
+    "rules": [
+      {
+        "name": "The Four Grays Rule",
+        "body": "Grays come in four fixed steps. Never add an in-between tint, never tint a gray warm or cool.",
+        "section": "colors"
+      },
+      {
+        "name": "The Monitor Rule",
+        "body": "Color appears only inside video frames and their posters. No accent color, no colored icon, no colored state.",
+        "section": "colors"
+      },
+      {
+        "name": "The One Stamp Rule",
+        "body": "A heading may set a single word in Syne 800. Never two, never a whole line.",
+        "section": "typography"
+      },
+      {
+        "name": "The Lining Figures Rule",
+        "body": "Syne numerals always render with lnum; its default old-style figures break the numeral squares.",
+        "section": "typography"
+      },
+      {
+        "name": "The Flat Sign Rule",
+        "body": "Signs never cast shadows. Hierarchy comes from ink versus white and from size.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do end every action in a square arrow pictogram that points where it goes.",
+      "Do keep one message per sign and one sign per section.",
+      "Do set step and count numbers in Syne 800 with lining figures inside ink squares, and use a big number only when it is a real fact (4 business days, 9:16, 3 rounds, 8 videos).",
+      "Do keep posters lazy, videos preload=\"none\", muted and playsinline.",
+      "Do respect reduced motion: every animated state has a visible static default."
+    ],
+    "donts": [
+      "Don't add any color outside a video frame.",
+      "Don't round a corner.",
+      "Don't add shadows to panels, buttons or cards.",
+      "Don't put a kicker or eyebrow label above a heading.",
+      "Don't use glyphs or emoji as icons; pictograms are authored SVG on a 24px grid."
+    ]
+  }
+}

@@ -1,0 +1,59 @@
+---
+// Renders one lockup from /public/brand/GENCI.svg without redrawing it:
+// the paths are copied verbatim from the artboard and only the viewBox is cropped.
+// Color follows `currentColor`, so light and dark usage is set with CSS `color`.
+import raw from '../../public/brand/GENCI.svg?raw';
+
+interface Props {
+  variant?: 'mark' | 'lockup' | 'full';
+  class?: string;
+  title?: string;
+}
+
+const { variant = 'lockup', class: className = '', title = 'GENCI' } = Astro.props;
+
+// Returns the outer markup of the <g> with the given id, nested groups included.
+function group(id) {
+  const start = raw.indexOf(`<g id="${id}">`);
+  if (start < 0) return '';
+  let depth = 0;
+  const re = /<\/?g\b[^>]*>/g;
+  re.lastIndex = start;
+  let m;
+  while ((m = re.exec(raw))) {
+    depth += m[0].startsWith('</') ? -1 : 1;
+    if (depth === 0) return raw.slice(start, re.lastIndex);
+  }
+  return '';
+}
+
+// The artboard's loose INTERNATIONAL path sits directly after the mark-only group.
+function looseInternational() {
+  const after = raw.indexOf('</g>', raw.indexOf('<g id="_1492578177536">')) + 4;
+  const m = /<path class="fil1"[^>]*\/>/.exec(raw.slice(after));
+  return m ? m[0] : '';
+}
+
+const parts = {
+  mark: { box: '0 0 5106 3047', body: group('_1492578177536') },
+  lockup: { box: '6015 0 5106 3868', body: group('_1492578177632') },
+  full: { box: '0 4509 5106 4255', body: group('_1492578180896') + looseInternational() },
+}[variant];
+
+// fil0 inherits the root even-odd rule; fil1 keeps its own nonzero rule.
+const body = parts.body
+  .replace(/ class="fil0"/g, '')
+  .replace(/ class="fil1"/g, ' fill-rule="nonzero"')
+  .replace(/ id="[^"]*"/g, '');
+---
+<svg
+  class={`logo logo--${variant} ${className}`}
+  viewBox={parts.box}
+  role="img"
+  aria-label={title}
+  fill="currentColor"
+  fill-rule="evenodd"
+  clip-rule="evenodd"
+  xmlns="http://www.w3.org/2000/svg"
+  set:html={body}
+></svg>

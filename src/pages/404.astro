@@ -1,0 +1,31 @@
+---
+import Base from '../layouts/Base.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import MobileBar from '../components/MobileBar.astro';
+import Icon from '../components/Icon.astro';
+---
+<Base title="Page not found | GENCI" description="This page does not exist. Head back to GENCI to get a free sample edit." faqSchema={false} noindex>
+  <Header home="/" />
+  <main id="main" class="lost on-dark">
+    <div class="wrap lost__in">
+      <p class="lost__code syne" aria-hidden="true">404</p>
+      <h1 class="lost__title">This page isn’t on the route.</h1>
+      <p class="lost__text">The link may be old or mistyped. Everything about GENCI is on the home page.</p>
+      <a class="btn btn--inverse" href="/">
+        <span class="btn__text">Back to GENCI</span>
+        <span class="btn__sq"><Icon name="arrow-right" /></span>
+      </a>
+    </div>
+  </main>
+  <Footer />
+  <MobileBar />
+</Base>
+
+<style>
+  .lost { padding-block: clamp(64px, 10vw, 160px); }
+  .lost__in { display: grid; gap: 20px; justify-items: start; }
+  .lost__code { font-size: clamp(5rem, 3rem + 10vw, 11rem); line-height: 0.85; }
+  .lost__title { font-size: clamp(2rem, 1.2rem + 3.4vw, 4rem); max-width: 16ch; }
+  .lost__text { color: var(--g2); max-width: 46ch; }
+</style>

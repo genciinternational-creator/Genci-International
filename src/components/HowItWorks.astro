@@ -1,0 +1,109 @@
+---
+import Icon from './Icon.astro';
+
+const steps = [
+  {
+    title: 'Send your clips.',
+    text: 'Film the job the way you already do: the mess, the work, the finish. Text, email or share a link from your phone.',
+  },
+  {
+    title: 'We edit.',
+    text: 'We pick the strongest shots and add captions, music and your logo in the format you ask for. Your video is ready in 4 business days.',
+  },
+  {
+    title: 'You post.',
+    text: 'Put it on your pages, run it as an ad or text it to a homeowner who asked for photos of your work.',
+  },
+];
+---
+<section class="how section" id="how" aria-labelledby="how-title">
+  <div class="wrap how__grid" data-how>
+    <div class="how__head">
+      <h2 id="how-title" class="h2">Three steps. You only handle the first.</h2>
+      <p class="lede">If you already film your jobs, you’ve done the hard part.</p>
+    </div>
+
+    <div class="corridor">
+      <span class="corridor__rail" aria-hidden="true"><span class="corridor__fill" data-how-fill></span></span>
+      <ol class="corridor__list" role="list">
+        {steps.map((s, i) => (
+          <li class="station on-dark" data-station>
+            <span class="num station__num">{i + 1}</span>
+            <div class="station__body">
+              <h3 class="station__title">{s.title}</h3>
+              <p class="station__text">{s.text}</p>
+            </div>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </div>
+</section>
+
+<section class="midgate on-dark" aria-label="Free sample edit">
+  <div class="wrap midgate__in">
+    <p class="midgate__msg">Try it on one of your jobs. Your first <span class="nobr">30-second</span> edit is free.</p>
+    <a class="btn btn--inverse midgate__btn" href="#sample">
+      <span class="btn__text">Get my free sample edit</span>
+      <span class="btn__sq"><Icon name="arrow-right" /></span>
+    </a>
+  </div>
+</section>
+
+<style>
+  .how__grid { display: grid; gap: clamp(32px, 5vw, 72px); }
+  @media (min-width: 1024px) {
+    .how__grid { grid-template-columns: 5fr 7fr; align-items: start; }
+  }
+  .how__head { display: grid; gap: 20px; align-content: start; }
+
+  .corridor { position: relative; padding-left: 28px; }
+  .corridor__rail {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background: var(--g2);
+    overflow: hidden;
+  }
+  .corridor__fill {
+    position: absolute;
+    inset: 0;
+    background: var(--ink);
+    transform-origin: 50% 0;
+  }
+  .corridor__list { list-style: none; padding: 0; display: grid; gap: clamp(16px, 2vw, 24px); }
+
+  .station {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: clamp(16px, 2vw, 28px);
+    padding: clamp(18px, 2.4vw, 32px);
+    border: 1px solid var(--g4);
+  }
+  .station__num { width: clamp(48px, 4vw, 64px); font-size: clamp(1.5rem, 1.2rem + 1vw, 2.25rem); }
+  .station__title { font-size: clamp(1.5rem, 1.1rem + 1.6vw, 2.5rem); line-height: 1.05; }
+  .station__text { margin-top: 10px; max-width: 46ch; color: var(--muted); }
+
+  .midgate { border-block: 1px solid var(--g4); }
+  .midgate__in {
+    display: grid;
+    gap: 20px;
+    padding-block: clamp(36px, 5vw, 64px);
+  }
+  .midgate__msg {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(1.5rem, 1.1rem + 1.8vw, 2.75rem);
+    line-height: 1.08;
+    letter-spacing: -0.02em;
+    max-width: 24ch;
+    text-wrap: balance;
+  }
+  .midgate__btn { justify-self: start; }
+  @media (min-width: 900px) {
+    .midgate__in { grid-template-columns: 1fr auto; align-items: center; column-gap: 48px; }
+    .midgate__btn { min-height: 64px; font-size: 1.1875rem; }
+  }
+</style>

@@ -1,0 +1,36 @@
+---
+import Logo from './Logo.astro';
+import { contact } from '../data/site.js';
+const year = new Date().getFullYear();
+---
+<footer class="foot">
+  <div class="wrap foot__grid">
+    <Logo variant="full" title="GENCI International" class="foot__logo" />
+    <div class="foot__col">
+      <p class="label foot__label">Video editing for home service businesses</p>
+      <p>Serving the {contact.areaServed}.</p>
+      <p>Captions adapted to your customers’ language.</p>
+    </div>
+    <div class="foot__col">
+      <p class="label foot__label">Contact</p>
+      <p><a class="nobr" href={contact.tel}>{contact.phoneDisplay}</a></p>
+      <p><a href={contact.mailto}>{contact.email}</a></p>
+    </div>
+    <p class="foot__copy">© {year} GENCI. All rights reserved. <a href="/privacy/">Privacy policy</a></p>
+  </div>
+</footer>
+
+<style>
+  .foot { padding-block: clamp(48px, 6vw, 88px) clamp(32px, 4vw, 48px); color: var(--ink); background: var(--paper); }
+  .foot__grid { display: grid; gap: 32px; }
+  .foot :global(.foot__logo) { width: clamp(132px, 12vw, 176px); height: auto; color: var(--ink); }
+  .foot__col { display: grid; gap: 4px; align-content: start; color: var(--g4); }
+  .foot__label { color: var(--ink); margin-bottom: 8px; }
+  .foot__col a { color: var(--ink); font-weight: 500; }
+  .foot__copy { font-size: 0.875rem; color: var(--g4); padding-top: 24px; border-top: 1px solid var(--g2); }
+  .foot__copy a { margin-left: 12px; color: var(--ink); }
+  @media (min-width: 900px) {
+    .foot__grid { grid-template-columns: 4fr 4fr 4fr; align-items: start; }
+    .foot__copy { grid-column: 1 / -1; }
+  }
+</style>

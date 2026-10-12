@@ -1,0 +1,309 @@
+/* GENCI: overhead-sign system. Ink signs on a white concourse; color only inside video frames. */
+
+@font-face {
+  font-family: 'GENCI Display';
+  /* TeX Gyre Adventor, subset to Latin. License: /fonts/licenses/TeX-Gyre-GUST-FONT-LICENSE.txt */
+  src: url('/fonts/tex-gyre-adventor-bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'GENCI Display';
+  src: url('/fonts/tex-gyre-adventor-regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Outfit';
+  src: url('/fonts/outfit-latin-var.woff2') format('woff2');
+  font-weight: 300 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Syne';
+  src: url('/fonts/syne-latin-var.woff2') format('woff2');
+  font-weight: 500 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Metric-matched fallbacks so the swap to the web fonts does not reflow the hero. */
+@font-face {
+  font-family: 'GENCI Display Fallback';
+  src: local('Arial Bold'), local('Arial-BoldMT'), local('Arial');
+  font-weight: 700;
+  size-adjust: 99.3%;
+}
+@font-face {
+  font-family: 'Outfit Fallback';
+  src: local('Arial'), local('ArialMT');
+  font-weight: 300 700;
+  size-adjust: 98.7%;
+}
+
+:root {
+  /* Ink, paper and four fixed grays. Nothing in between. */
+  --ink: #0a0a0a;
+  --paper: #ffffff;
+  --g1: #f2f2f2;
+  --g2: #d4d4d4;
+  --g3: #737373;
+  --g4: #3a3a3a;
+
+  --fg: var(--ink);
+  --bg: var(--paper);
+  --muted: var(--g4); /* secondary text on paper, 11.6:1 */
+  --rule: var(--g2);
+  --focus: var(--ink);
+
+  --font-display: 'GENCI Display', 'GENCI Display Fallback', sans-serif;
+  --font-body: 'Outfit', 'Outfit Fallback', ui-sans-serif, system-ui, sans-serif;
+  --font-label: 'Syne', 'GENCI Display Fallback', sans-serif;
+
+  --gutter: clamp(16px, 4vw, 56px);
+  --max: 1440px;
+  --section: clamp(72px, 9vw, 152px);
+  --header-h: 60px;
+  --mobile-bar-h: 0px;
+
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+
+  color-scheme: light;
+  accent-color: var(--ink);
+}
+
+@media (min-width: 768px) {
+  :root { --header-h: 72px; }
+}
+@media (max-width: 767.98px) {
+  :root { --mobile-bar-h: calc(64px + env(safe-area-inset-bottom)); }
+}
+
+/* Dark sign surfaces flip the local tokens. */
+.on-dark {
+  --fg: var(--paper);
+  --bg: var(--ink);
+  --muted: var(--g2);
+  --rule: var(--g4);
+  --focus: var(--paper);
+  color: var(--fg);
+  background: var(--bg);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+* { margin: 0; }
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  scroll-padding-top: calc(var(--header-h) + 16px);
+  scroll-padding-bottom: calc(var(--mobile-bar-h) + 16px);
+  background: var(--paper);
+}
+
+body {
+  min-height: 100vh;
+  font-family: var(--font-body);
+  font-size: 1.0625rem;
+  line-height: 1.55;
+  font-weight: 400;
+  color: var(--ink);
+  background: var(--paper);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  padding-bottom: var(--mobile-bar-h);
+}
+
+img, video, svg { display: block; max-width: 100%; }
+button, input, select, textarea { font: inherit; color: inherit; }
+button { cursor: pointer; }
+
+h1, h2, h3 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  line-height: 1.02;
+  letter-spacing: -0.025em;
+  text-wrap: balance;
+}
+p { text-wrap: pretty; }
+
+a { color: inherit; text-decoration-thickness: 1px; text-underline-offset: 0.22em; }
+a:hover { text-decoration-thickness: 2px; }
+
+::selection { background: var(--ink); color: var(--paper); }
+.on-dark ::selection { background: var(--paper); color: var(--ink); }
+
+:focus { outline: none; }
+:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 3px;
+}
+/* Keep focused controls clear of the sticky header and the mobile Call/Text bar. */
+:focus {
+  scroll-margin-top: calc(var(--header-h) + 16px);
+  scroll-margin-bottom: calc(var(--mobile-bar-h) + 16px);
+}
+
+html { scrollbar-color: var(--g4) var(--g1); }
+
+/* Layout */
+.wrap {
+  width: 100%;
+  max-width: var(--max);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+.grid {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: clamp(16px, 2vw, 32px);
+}
+.section { padding-block: var(--section); }
+
+/* Type helpers */
+.label {
+  font-family: var(--font-label);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  line-height: 1.3;
+  font-variant-numeric: lining-nums; font-feature-settings: 'lnum' 1;
+}
+.syne { font-family: var(--font-label); font-weight: 800; letter-spacing: -0.01em; font-variant-numeric: lining-nums; font-feature-settings: 'lnum' 1; }
+.h2 {
+  font-size: clamp(2rem, 1.2rem + 3.4vw, 4.25rem);
+  max-width: 18ch;
+}
+.lede {
+  font-size: clamp(1.0625rem, 1rem + 0.35vw, 1.25rem);
+  line-height: 1.5;
+  max-width: 54ch;
+  color: var(--muted);
+}
+
+/* Sign button: a small panel ending in an arrow square. */
+.btn {
+  --btn-bg: var(--ink);
+  --btn-fg: var(--paper);
+  --sq-bg: var(--paper);
+  --sq-fg: var(--ink);
+  display: inline-flex;
+  align-items: stretch;
+  min-height: 56px;
+  padding: 0;
+  border: 1px solid var(--btn-bg);
+  background: var(--btn-bg);
+  color: var(--btn-fg);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.0625rem;
+  letter-spacing: -0.01em;
+  line-height: 1.15;
+  text-decoration: none;
+  text-align: left;
+}
+.btn__text { display: flex; align-items: center; padding: 0.75rem 1.25rem; flex: 1; }
+.btn__sq {
+  display: grid;
+  place-items: center;
+  width: 56px;
+  flex: none;
+  background: var(--sq-bg);
+  color: var(--sq-fg);
+  border-left: 1px solid var(--btn-bg);
+}
+.btn__sq .icon { width: 24px; height: 24px; transition: transform 0.35s var(--ease-out); }
+.btn:hover .btn__sq .icon { transform: translateX(4px); }
+.btn:hover { text-decoration: none; }
+.btn:active .btn__sq .icon { transform: translateX(6px); }
+.btn--inverse { --btn-bg: var(--paper); --btn-fg: var(--ink); --sq-bg: var(--ink); --sq-fg: var(--paper); }
+.btn--small { min-height: 44px; font-size: 0.875rem; }
+.btn--small .btn__text { padding: 0.5rem 0.85rem; }
+.btn--small .btn__sq { width: 44px; }
+.btn--small .btn__sq .icon { width: 20px; height: 20px; }
+.btn[disabled], .btn[aria-disabled='true'] { opacity: 0.55; cursor: progress; }
+
+/* Pictogram square */
+.pict {
+  display: grid;
+  place-items: center;
+  width: clamp(44px, 3.2vw + 30px, 64px);
+  aspect-ratio: 1;
+  background: var(--fg);
+  color: var(--bg);
+  flex: none;
+}
+.pict .icon { width: 58%; height: 58%; }
+
+/* Numeral square for steps and gates */
+.num {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  aspect-ratio: 1;
+  background: var(--ink);
+  color: var(--paper);
+  font-family: var(--font-label);
+  font-weight: 800;
+  font-size: 1.375rem;
+  line-height: 1;
+  font-variant-numeric: lining-nums tabular-nums; font-feature-settings: 'lnum' 1, 'tnum' 1;
+  flex: none;
+}
+.on-dark .num { background: var(--paper); color: var(--ink); }
+
+
+.icon { width: 1em; height: 1em; flex: none; }
+.nobr { white-space: nowrap; }
+
+.sr-only {
+  position: absolute !important;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.skip {
+  position: absolute;
+  left: 8px;
+  top: -100px;
+  z-index: 100;
+  padding: 12px 16px;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-display);
+  font-weight: 700;
+}
+.skip:focus { top: 8px; }
+
+/* Video monitor frame: the only place color lives. */
+.monitor {
+  position: relative;
+  aspect-ratio: 9 / 16;
+  background: var(--g4);
+  overflow: hidden;
+  border: 1px solid var(--g4);
+}
+.monitor video, .monitor img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

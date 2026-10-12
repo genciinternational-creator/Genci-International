@@ -1,0 +1,86 @@
+---
+import { highlights } from '../data/site.js';
+
+// Word marks repeat their title, so only numeric marks are read aloud.
+const isNumber = (mark) => /\d/.test(mark);
+---
+<section class="proof" aria-labelledby="proof-title">
+  <div class="wrap">
+    <h2 id="proof-title" class="sr-only">What you can count on</h2>
+    <ul class="hl-row" role="list">
+      {highlights.map((h) => (
+        <li class="hl">
+          <span class="hl__mark syne" aria-hidden={isNumber(h.mark) ? undefined : 'true'}>{h.mark}</span>
+          <h3 class="hl__title">{h.title}</h3>
+          <p class="hl__text">{h.text}</p>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>
+
+<style>
+  .proof { padding-block: clamp(40px, 6vw, 88px) 0; }
+  .hl-row {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    border-block: 1px solid var(--ink);
+  }
+  .hl {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    grid-template-areas: 'mark title' 'text text';
+    align-items: end;
+    column-gap: 16px;
+    row-gap: 10px;
+    padding-block: 22px;
+  }
+  .hl + .hl { border-top: 1px solid var(--g2); }
+  .hl__mark {
+    grid-area: mark;
+    font-size: clamp(2.75rem, 1.9rem + 3.3vw, 5.25rem);
+    line-height: 0.82;
+    letter-spacing: -0.02em;
+    white-space: nowrap;
+  }
+  .hl__title {
+    grid-area: title;
+    font-size: clamp(1.0625rem, 1rem + 0.35vw, 1.3125rem);
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+  }
+  .hl__text {
+    grid-area: text;
+    max-width: 34ch;
+    font-size: 0.9375rem;
+    line-height: 1.5;
+    color: var(--g4);
+  }
+
+  @media (min-width: 640px) {
+    .hl-row { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .hl {
+      grid-template-columns: minmax(0, 1fr);
+      grid-template-areas: 'mark' 'title' 'text';
+      align-content: start;
+      row-gap: 14px;
+      padding-block: 28px 32px;
+    }
+    .hl:nth-child(2) { border-top: 0; }
+    .hl:nth-child(odd) { padding-right: 24px; border-right: 1px solid var(--g2); }
+    .hl:nth-child(even) { padding-left: 24px; }
+    .hl__mark { margin-bottom: 8px; }
+  }
+
+  @media (min-width: 1280px) {
+    .hl-row { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    .hl,
+    .hl:nth-child(odd),
+    .hl:nth-child(even) { padding-inline: 24px; border-right: 1px solid var(--g2); }
+    .hl + .hl { border-top: 0; }
+    .hl:first-child { padding-left: 0; }
+    .hl:last-child { padding-right: 0; border-right: 0; }
+  }
+</style>

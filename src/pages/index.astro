@@ -1,0 +1,41 @@
+---
+import Base from '../layouts/Base.astro';
+import Header from '../components/Header.astro';
+import Hero from '../components/Hero.astro';
+import ProofStrip from '../components/ProofStrip.astro';
+import NicheBoard from '../components/NicheBoard.astro';
+import BeforeAfter from '../components/BeforeAfter.astro';
+import HowItWorks from '../components/HowItWorks.astro';
+import WhatYouGet from '../components/WhatYouGet.astro';
+import Founder from '../components/Founder.astro';
+import Pricing from '../components/Pricing.astro';
+import Faq from '../components/Faq.astro';
+import FinalCta from '../components/FinalCta.astro';
+import Footer from '../components/Footer.astro';
+import MobileBar from '../components/MobileBar.astro';
+---
+<Base
+  title="GENCI | Video Editing for Bay Area Home Service Businesses"
+  description="Send the clips from your phone. GENCI edits them into short videos for Reels, TikTok, Shorts, Facebook and Google ads. Get a free 30-second sample edit."
+>
+  <script is:inline>document.documentElement.classList.add('js');</script>
+  <Header />
+  <main id="main">
+    <Hero />
+    <ProofStrip />
+    <NicheBoard />
+    <BeforeAfter />
+    <HowItWorks />
+    <WhatYouGet />
+    <Founder />
+    <Pricing />
+    <Faq />
+    <FinalCta />
+  </main>
+  <Footer />
+  <MobileBar />
+</Base>
+
+<script>
+  import '../scripts/main.js';
+</script>

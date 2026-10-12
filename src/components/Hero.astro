@@ -1,0 +1,227 @@
+---
+import Icon from './Icon.astro';
+---
+<section class="hero" id="top" aria-labelledby="hero-title">
+  <div class="wrap hero__grid">
+    <div class="hero__ground" aria-hidden="true"></div>
+
+    <div class="hero__copy on-dark">
+      <span class="pict hero__pict"><Icon name="arrow-down" /></span>
+      <h1 id="hero-title" class="hero__title">
+        You film the job. We turn it into videos that bring in <span class="syne">quotes.</span>
+      </h1>
+      <p class="hero__sub">
+        For house cleaning, remodeling and carpet cleaning companies across the Bay Area. Send the clips from your
+        phone. Get back short videos ready to post and run as ads.
+      </p>
+    </div>
+
+    <ol class="route" aria-label="How it works">
+      <li class="route__sign"><span class="num">1</span><span>Send us your phone clips</span></li>
+      <li class="route__sign"><span class="num">2</span><span>We edit them into short videos</span></li>
+      <li class="route__sign"><span class="num">3</span><span>You post them and run them as ads</span></li>
+    </ol>
+
+    <div class="gate on-dark">
+      <a class="gate__btn" href="#sample">
+        <span class="gate__text">Get my free sample edit</span>
+        <span class="gate__sq"><Icon name="arrow-right" /></span>
+      </a>
+      <p class="gate__note">One <span class="nobr">30-second</span> video, free. No card.</p>
+    </div>
+
+    <figure class="hero__mon">
+      <div class="monitor">
+        <video
+          class="hero-reel"
+          data-video
+          data-hero
+          data-src="/videos/hero-reel.mp4"
+          poster="/videos/hero-reel.webp"
+          width="540"
+          height="960"
+          muted
+          loop
+          playsinline
+          preload="none"
+        ></video>
+        <button class="reel-toggle" type="button" data-reel-toggle aria-pressed="false" hidden>
+          <span class="reel-toggle__label">Pause</span>
+        </button>
+      </div>
+      <figcaption class="label hero__cap">Client edits, muted<span class="sr-only">: house cleaning, carpet cleaning, a bathroom remodel and junk removal</span></figcaption>
+    </figure>
+  </div>
+</section>
+
+<style>
+  .hero__grid {
+    position: relative;
+    isolation: isolate;
+    display: grid;
+    /* Phones and tablets: the reel sits beside the route signs, so a playing video is in the first screen. */
+    grid-template-columns: clamp(118px, 34vw, 210px) minmax(0, 1fr);
+    grid-template-areas: 'copy copy' 'mon route' 'gate gate';
+    column-gap: 14px;
+  }
+  .hero__ground {
+    grid-area: copy;
+    z-index: -1;
+    background: var(--ink);
+    box-shadow: 0 0 0 100vmax var(--ink);
+    clip-path: inset(0 -100vmax);
+  }
+  .hero__copy {
+    grid-area: copy;
+    background: var(--ink);
+    padding-block: clamp(22px, 4vw, 64px) clamp(22px, 4vw, 64px);
+  }
+  .hero__pict { margin-bottom: clamp(14px, 2.4vw, 36px); }
+  .hero__title {
+    font-size: clamp(2.125rem, 1.25rem + 3.9vw, 5.5rem);
+    line-height: 1.03;
+    max-width: 15ch;
+  }
+  .hero__title .syne { font-size: 1em; letter-spacing: -0.02em; }
+  .hero__sub {
+    margin-top: clamp(16px, 2vw, 28px);
+    max-width: 52ch;
+    font-size: clamp(1rem, 0.95rem + 0.35vw, 1.25rem);
+    line-height: 1.5;
+    color: var(--muted);
+  }
+
+  .route {
+    grid-area: route;
+    list-style: none;
+    padding: 0;
+    margin-block: 12px;
+    display: grid;
+    grid-auto-rows: 1fr;
+    border-top: 1px solid var(--ink);
+  }
+  .route__sign {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    min-height: 60px;
+    padding-block: 8px;
+    border-bottom: 1px solid var(--ink);
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(0.9375rem, 0.85rem + 0.5vw, 1.0625rem);
+    line-height: 1.2;
+  }
+  .route__sign .num { width: 36px; font-size: 1.125rem; }
+
+  .gate {
+    grid-area: gate;
+    margin-inline: calc(-1 * var(--gutter));
+    padding: 0;
+  }
+  .gate__btn {
+    display: flex;
+    align-items: stretch;
+    min-height: 76px;
+    color: var(--paper);
+    text-decoration: none;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(1.25rem, 1rem + 1vw, 1.75rem);
+    letter-spacing: -0.015em;
+  }
+  .gate__text { display: flex; align-items: center; flex: 1; padding: 12px var(--gutter); }
+  .gate__sq {
+    display: grid;
+    place-items: center;
+    width: 76px;
+    flex: none;
+    background: var(--paper);
+    color: var(--ink);
+  }
+  .gate__sq :global(.icon) { width: 30px; height: 30px; transition: transform 0.35s var(--ease-out); }
+  .gate__btn:hover .gate__sq :global(.icon) { transform: translateX(5px); }
+  .gate__btn:focus-visible { outline-offset: -6px; }
+  .gate__note {
+    padding: 0 var(--gutter) 16px;
+    font-size: 0.875rem;
+    color: var(--muted);
+  }
+
+  .hero__mon {
+    position: relative;
+    grid-area: mon;
+    width: 100%;
+    margin-block: 12px;
+  }
+  /* On small screens the monitor is too narrow for a caption; it stays available to screen readers. */
+  .hero__cap {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+  }
+
+  .reel-toggle {
+    position: absolute;
+    right: 6px;
+    bottom: 6px;
+    min-height: 36px;
+    padding: 0 10px;
+    border: 0;
+    background: var(--ink);
+    color: var(--paper);
+    font-family: var(--font-label);
+    font-weight: 700;
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+  .reel-toggle:focus-visible { outline-color: var(--paper); outline-offset: -5px; }
+
+  @media (min-width: 1024px) {
+    .hero__grid {
+      grid-template-columns: repeat(12, minmax(0, 1fr));
+      column-gap: clamp(16px, 2vw, 32px);
+      grid-template-areas:
+        'copy copy copy copy copy copy copy copy . mon mon mon'
+        'route route route route route route route route gate gate gate gate';
+    }
+    .hero__copy { padding-block: clamp(40px, 5vh, 72px); }
+    .hero__mon {
+      align-self: start;
+      justify-self: end;
+      width: min(100%, calc((100vh - var(--header-h) - 220px) * 9 / 16), 340px);
+      margin: 32px 0;
+      background: var(--ink);
+    }
+    .hero__cap { position: static; width: auto; height: auto; overflow: visible; clip: auto; white-space: normal; margin-top: 10px; color: var(--g2); }
+    .route {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      grid-auto-rows: auto;
+      margin-block: 0;
+      border-top: 0;
+    }
+    .route__sign {
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 16px 16px 16px 0;
+      border-bottom: 1px solid var(--ink);
+      border-right: 1px solid var(--g2);
+      margin-right: 16px;
+      font-size: 1.125rem;
+    }
+    .route__sign .num { width: 44px; font-size: 1.25rem; }
+    .route__sign:last-child { border-right: 0; }
+    .gate { margin-inline: 0; display: flex; flex-direction: column; justify-content: center; }
+    .gate__btn { flex: 1; min-height: 96px; }
+    .gate__text { padding-inline: 24px; }
+    .gate__sq { width: 88px; }
+    .gate__note { padding: 0 24px 14px; }
+  }
+</style>

@@ -1,0 +1,78 @@
+---
+import '../styles/global.css';
+import Analytics from '../components/Analytics.astro';
+import { contact, faq } from '../data/site.js';
+
+interface Props {
+  title: string;
+  description: string;
+  faqSchema?: boolean;
+  noindex?: boolean;
+}
+
+const { title, description, faqSchema = true, noindex = false } = Astro.props;
+const site = Astro.site;
+const canonical = site ? new URL(Astro.url.pathname, site).href : null;
+const ogImage = site ? new URL('/og-image.jpg', site).href : '/og-image.jpg';
+const logo = site ? new URL('/brand/genci-logo.png', site).href : '/brand/genci-logo.png';
+
+const businessId = site ? new URL('/#business', site).href : '#business';
+
+// One graph: the business, the site (once the domain is known) and the visible FAQ.
+const graph = [
+  {
+    '@type': 'ProfessionalService',
+    '@id': businessId,
+    name: 'GENCI',
+    description:
+      'Video editing studio that turns raw phone footage from local service businesses into short, ready-to-post videos for Instagram Reels, TikTok, YouTube Shorts, Facebook and Google ads.',
+    telephone: contact.phoneSchema,
+    email: contact.email,
+    areaServed: { '@type': 'Place', name: contact.areaServed },
+    ...(site && { url: site.href, logo, image: ogImage }),
+  },
+  ...(site ? [{ '@type': 'WebSite', '@id': new URL('/#website', site).href, name: 'GENCI', url: site.href, publisher: { '@id': businessId } }] : []),
+  faqSchema && {
+    '@type': 'FAQPage',
+    mainEntity: faq.map((item) => ({ '@type': 'Question', name: item.q, acceptedAnswer: { '@type': 'Answer', text: item.a } })),
+  },
+].filter(Boolean);
+const schema = { '@context': 'https://schema.org', '@graph': graph };
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    {canonical && !noindex && <link rel="canonical" href={canonical} />}
+    {noindex && <meta name="robots" content="noindex" />}
+    <meta name="theme-color" content="#0a0a0a" />
+    <meta name="format-detection" content="telephone=no" />
+
+    <link rel="preload" href="/fonts/tex-gyre-adventor-bold.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="GENCI" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    {canonical && <meta property="og:url" content={canonical} />}
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="GENCI: short videos edited from job-site phone clips" />
+    <meta property="og:locale" content="en_US" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+    <Analytics />
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+    <slot />
+  </body>
+</html>

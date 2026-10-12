@@ -1,0 +1,54 @@
+---
+// Optional measurement for ads. Set PUBLIC_GA4_ID (G-XXXXXXXXXX) and/or PUBLIC_META_PIXEL_ID in the
+// host's environment variables and redeploy. While both are empty, nothing loads.
+const ga4 = import.meta.env.PUBLIC_GA4_ID || '';
+const pixel = import.meta.env.PUBLIC_META_PIXEL_ID || '';
+const enabled = Boolean(ga4 || pixel);
+---
+{enabled && (
+  <script is:inline define:vars={{ ga4, pixel }}>
+    window.dataLayer = window.dataLayer || [];
+    window.gtag = function () { window.dataLayer.push(arguments); };
+    if (ga4) {
+      gtag('js', new Date());
+      gtag('config', ga4);
+    }
+    if (pixel) {
+      const fbq = (window.fbq = function () {
+        fbq.callMethod ? fbq.callMethod.apply(fbq, arguments) : fbq.queue.push(arguments);
+      });
+      window._fbq = fbq;
+      fbq.push = fbq;
+      fbq.loaded = true;
+      fbq.version = '2.0';
+      fbq.queue = [];
+      fbq('init', pixel);
+      fbq('track', 'PageView');
+    }
+
+    // The tag libraries load after the page, so tracking never delays the headline.
+    const load = (src) => {
+      const s = document.createElement('script');
+      s.async = true;
+      s.src = src;
+      document.head.appendChild(s);
+    };
+    addEventListener('load', () => {
+      if (ga4) load('https://www.googletagmanager.com/gtag/js?id=' + encodeURIComponent(ga4));
+      if (pixel) load('https://connect.facebook.net/en_US/fbevents.js');
+    }, { once: true });
+
+    // Conversions: a sent sample request, and taps on Call, Text or Email.
+    addEventListener('genci:lead', () => {
+      if (ga4) gtag('event', 'generate_lead');
+      if (pixel) fbq('track', 'Lead');
+    });
+    document.addEventListener('click', (e) => {
+      const link = e.target.closest('a[href^="tel:"], a[href^="sms:"], a[href^="mailto:"]');
+      if (!link) return;
+      const method = link.getAttribute('href').split(':')[0];
+      if (ga4) gtag('event', 'contact', { method });
+      if (pixel) fbq('track', 'Contact', { method });
+    });
+  </script>
+)}

@@ -1,0 +1,44 @@
+---
+import Logo from './Logo.astro';
+import Icon from './Icon.astro';
+
+// On the home page links stay in-page; other pages point back to it.
+const { home = '' } = Astro.props;
+---
+<header class="site-header on-dark">
+  <div class="wrap site-header__in">
+    <a href={home ? home : '#top'} class="site-header__home" aria-label={home ? 'GENCI home' : 'GENCI, back to top'}>
+      <Logo variant="lockup" title="GENCI" />
+    </a>
+    <a class="btn btn--inverse btn--small" href={`${home}#sample`}>
+      <span class="btn__text">Get my free sample edit</span>
+      <span class="btn__sq"><Icon name="arrow-right" /></span>
+    </a>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    position: relative;
+    z-index: 40;
+    border-bottom: 1px solid var(--g4);
+  }
+  @media (min-width: 768px) {
+    .site-header { position: sticky; top: 0; }
+  }
+  .site-header__in {
+    height: var(--header-h);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+  }
+  .site-header__home { display: flex; align-items: center; min-height: 44px; color: var(--paper); }
+  .site-header__home :global(.logo) { height: 34px; width: auto; }
+  @media (min-width: 768px) {
+    .site-header__home :global(.logo) { height: 42px; }
+  }
+  @media (max-width: 359.98px) {
+    .site-header :global(.btn__sq) { display: none; }
+  }
+</style>

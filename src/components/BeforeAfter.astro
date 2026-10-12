@@ -1,0 +1,105 @@
+---
+import Icon from './Icon.astro';
+
+// Both photos come from the "46 carpet cleaning" client edit (frame at 0:15), cropped to 9:16 around the stain.
+const before = { src: '/videos/before-after-before.webp', alt: 'Carpet before cleaning, with dark stains across the floor' };
+const after = { src: '/videos/before-after-after.webp', alt: 'The same carpet after cleaning, even color with fresh stripes' };
+---
+<section class="ba section" id="compare" aria-labelledby="ba-title">
+  <div class="wrap ba__grid">
+    <div class="ba__copy">
+      <h2 id="ba-title" class="h2">Show the stain. Then show it gone.</h2>
+      <p class="lede">
+        The before and the after are what a homeowner pays for, so we put them where nobody can miss them.
+        These two shots come from a carpet cleaning edit we made for a client. Drag the line.
+      </p>
+      <a class="btn ba__link" href="#work" data-show-niche="carpet-cleaning">
+        <span class="btn__text">Watch the full carpet edit</span>
+        <span class="btn__sq"><Icon name="play" /></span>
+      </a>
+    </div>
+
+    <div class="ba__stage" data-ba style="--pos: 60%">
+      <div class="ba__frame">
+        <img class="ba__img" src={before.src} alt={before.alt} width="540" height="960" loading="lazy" decoding="async" draggable="false" />
+        <img class="ba__img ba__img--after" src={after.src} alt={after.alt} width="540" height="960" loading="lazy" decoding="async" draggable="false" />
+        <span class="ba__tag label ba__tag--before">Before</span>
+        <span class="ba__tag label ba__tag--after">After</span>
+        <span class="ba__divider" aria-hidden="true">
+          <span class="ba__handle"><Icon name="drag" /></span>
+        </span>
+      </div>
+      <label class="sr-only" for="ba-range">Move the divider between the before and after photos</label>
+      <input id="ba-range" class="ba__range" type="range" min="0" max="100" value="60" step="1" data-ba-range />
+    </div>
+  </div>
+</section>
+
+<style>
+  .ba__grid { display: grid; gap: clamp(32px, 5vw, 64px); }
+  .ba__copy { display: grid; gap: 24px; align-content: start; }
+  .ba__link { justify-self: start; }
+  @media (min-width: 1024px) {
+    .ba__grid { grid-template-columns: 5fr 6fr; align-items: center; }
+  }
+
+  .ba__stage {
+    position: relative;
+    width: min(100%, 420px);
+    justify-self: center;
+    touch-action: pan-y;
+    user-select: none;
+    -webkit-user-select: none;
+  }
+  .ba__frame {
+    position: relative;
+    aspect-ratio: 9 / 16;
+    overflow: hidden;
+    cursor: ew-resize;
+    border: 1px solid var(--ink);
+    background: var(--g4);
+  }
+  .ba__img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; pointer-events: none; -webkit-user-drag: none; }
+  .ba__img--after { clip-path: inset(0 0 0 var(--pos)); }
+
+  .ba__tag { position: absolute; top: 12px; padding: 6px 9px; background: var(--ink); color: var(--paper); z-index: 2; }
+  .ba__tag--before { left: 12px; }
+  .ba__tag--after { right: 12px; background: var(--paper); color: var(--ink); }
+
+  .ba__divider {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: var(--pos);
+    width: 2px;
+    margin-left: -1px;
+    background: var(--paper);
+    z-index: 3;
+    pointer-events: none;
+  }
+  .ba__handle {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    display: grid;
+    place-items: center;
+    width: 48px;
+    height: 48px;
+    transform: translate(-50%, -50%);
+    background: var(--paper);
+    color: var(--ink);
+    border: 1px solid var(--ink);
+  }
+  .ba__handle :global(.icon) { width: 26px; height: 26px; }
+
+  .ba__range {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    opacity: 0;
+    pointer-events: none;
+  }
+  .ba__stage:has(.ba__range:focus-visible) .ba__frame { outline: 3px solid var(--ink); outline-offset: 4px; }
+</style>

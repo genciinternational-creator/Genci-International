@@ -1,0 +1,183 @@
+---
+import Icon from './Icon.astro';
+import { contact, businessTypes } from '../data/site.js';
+
+// PUBLIC_FORMSPREE_ENDPOINT can point the form elsewhere; without it the live GENCI form is used,
+// so a deploy without the .env file still sends leads.
+const endpoint = import.meta.env.PUBLIC_FORMSPREE_ENDPOINT || 'https://formspree.io/f/xppqrlgw';
+---
+<section class="final on-dark" id="sample" aria-labelledby="final-title">
+  <div class="wrap final__grid">
+    <div class="final__copy">
+      <span class="pict"><Icon name="arrow-right" /></span>
+      <h2 id="final-title" class="final__title">Send us one job. Get the edit <span class="syne">free.</span></h2>
+      <p class="lede">Tell us who you are. We’ll text you how to send your clips.</p>
+
+      <div class="direct">
+        <p class="label direct__label">Rather call or text?</p>
+        <ul class="direct__list" role="list">
+          <li><a class="direct__link" href={contact.tel}><Icon name="phone" /><span>Call <span class="nobr">{contact.phoneDisplay}</span></span></a></li>
+          <li><a class="direct__link" href={contact.sms}><Icon name="message" /><span>Text <span class="nobr">{contact.phoneDisplay}</span></span></a></li>
+          <li><a class="direct__link" href={contact.mailto}><Icon name="mail" /><span>{contact.email}</span></a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="ticket">
+      <form class="lead" action={endpoint} method="POST" novalidate data-lead>
+        <input type="hidden" name="_subject" value="Free sample edit request" />
+        <div class="lead__trap" aria-hidden="true">
+          <label for="f-gotcha">Leave this field empty</label>
+          <input id="f-gotcha" type="text" name="_gotcha" tabindex="-1" autocomplete="off" />
+        </div>
+
+        <div class="field">
+          <label class="field__label" for="f-name">Your name</label>
+          <input class="field__input" id="f-name" name="name" type="text" autocomplete="name" required aria-describedby="f-name-err" />
+          <p class="field__err" id="f-name-err" data-err></p>
+        </div>
+
+        <div class="field">
+          <label class="field__label" for="f-type">Type of business</label>
+          <div class="field__select">
+            <select class="field__input" id="f-type" name="business_type" required aria-describedby="f-type-err">
+              <option value="" selected disabled>Choose one</option>
+              {businessTypes.map((t) => <option value={t}>{t}</option>)}
+            </select>
+            <Icon name="arrow-down" class="field__chev" />
+          </div>
+          <p class="field__err" id="f-type-err" data-err></p>
+        </div>
+
+        <div class="field">
+          <label class="field__label" for="f-phone">Mobile number</label>
+          <input class="field__input" id="f-phone" name="mobile" type="tel" inputmode="tel" autocomplete="tel" placeholder="(510) 555-0123" required aria-describedby="f-phone-err" />
+          <p class="field__err" id="f-phone-err" data-err></p>
+        </div>
+
+        <div class="field">
+          <label class="field__label" for="f-email">Email</label>
+          <input class="field__input" id="f-email" name="email" type="email" autocomplete="email" placeholder="you@yourbusiness.com" required aria-describedby="f-email-err" />
+          <p class="field__err" id="f-email-err" data-err></p>
+        </div>
+
+        <details class="extra">
+          <summary class="extra__toggle"><Icon name="plus" class="extra__icon" /> Add a link to your footage (optional)</summary>
+          <div class="field extra__field">
+            <label class="field__label" for="f-link">Link to your footage</label>
+            <input class="field__input" id="f-link" name="footage_link" type="url" inputmode="url" placeholder="Google Drive, Dropbox or iCloud link" aria-describedby="f-link-err f-link-hint" />
+            <p class="field__hint" id="f-link-hint">Paste a shared link. You can also send clips later by text.</p>
+            <p class="field__err" id="f-link-err" data-err></p>
+          </div>
+        </details>
+
+        <button class="btn lead__submit" type="submit" data-submit>
+          <span class="btn__text" data-submit-label>Get my free sample edit</span>
+          <span class="btn__sq"><Icon name="arrow-right" /></span>
+        </button>
+        <p class="lead__fine">By sending this form, you agree that GENCI may text or email you about your request. Message and data rates may apply. Read our <a href="/privacy/">privacy policy</a>.</p>
+
+        <div class="lead__status" role="status" aria-live="polite" data-status></div>
+      </form>
+
+      <div class="lead__done" data-done hidden tabindex="-1">
+        <p class="label">Received</p>
+        <p class="lead__done-msg">Got it. We answer requests every day, so expect a text or email from us.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .final { padding-block: var(--section); border-top: 1px solid var(--g4); }
+  .final__grid { display: grid; gap: clamp(40px, 5vw, 72px); }
+  @media (min-width: 1024px) {
+    .final__grid { grid-template-columns: 6fr 6fr; align-items: start; }
+  }
+  .final__copy { display: grid; gap: 24px; align-content: start; }
+  .final__title { font-size: clamp(2.25rem, 1.3rem + 4vw, 5rem); max-width: 13ch; }
+
+  .direct { margin-top: 12px; padding-top: 24px; border-top: 1px solid var(--g4); }
+  .direct__label { color: var(--g2); margin-bottom: 12px; }
+  .direct__list { list-style: none; padding: 0; display: grid; gap: 2px; }
+  .direct__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    min-height: 48px;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(1.0625rem, 1rem + 0.5vw, 1.375rem);
+    text-decoration: none;
+    word-break: break-word;
+  }
+  .direct__link :global(.icon) { width: 22px; height: 22px; }
+  .direct__link:hover span { text-decoration: underline; text-underline-offset: 0.2em; }
+
+  .ticket {
+    --fg: var(--ink);
+    --bg: var(--paper);
+    --muted: var(--g4);
+    --focus: var(--ink);
+    color: var(--ink);
+    background: var(--paper);
+    padding: clamp(20px, 3vw, 40px);
+    margin-inline: calc(-1 * var(--gutter));
+  }
+  @media (min-width: 640px) { .ticket { margin-inline: 0; } }
+  .ticket ::selection { background: var(--ink); color: var(--paper); }
+
+  .lead { display: grid; gap: 18px; }
+  .lead__trap { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+
+  .field { display: grid; gap: 6px; }
+  .field__label { font-family: var(--font-label); font-weight: 700; font-size: 0.8125rem; letter-spacing: 0.1em; text-transform: uppercase; }
+  .field__input {
+    width: 100%;
+    min-height: 54px;
+    padding: 12px 14px;
+    border: 1px solid var(--ink);
+    border-radius: 0;
+    background: var(--paper);
+    font-size: 1.0625rem;
+    caret-color: var(--ink);
+    appearance: none;
+  }
+  .field__input::placeholder { color: var(--g3); opacity: 1; }
+  .field__input:hover { background: var(--g1); }
+  .field__input:focus-visible { outline: 3px solid var(--ink); outline-offset: 2px; }
+  .field__input[aria-invalid='true'] { border-width: 2px; border-style: dashed; }
+  .field__select { position: relative; }
+  .field__select select { padding-right: 48px; }
+  .field__select :global(.field__chev) { position: absolute; right: 16px; top: 50%; width: 18px; height: 18px; transform: translateY(-50%); pointer-events: none; }
+  .field__err { font-size: 0.9375rem; font-weight: 600; color: var(--ink); }
+  .field__err:empty { display: none; }
+  .field__err::before { content: '! '; font-family: var(--font-label); font-weight: 800; }
+  .field__hint { font-size: 0.875rem; color: var(--g4); }
+
+  .extra__toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    min-height: 44px;
+    cursor: pointer;
+    list-style: none;
+    font-weight: 600;
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+  }
+  .extra__toggle::-webkit-details-marker { display: none; }
+  .extra__toggle :global(.extra__icon) { width: 16px; height: 16px; transition: transform 0.3s var(--ease-out); }
+  .extra[open] .extra__toggle :global(.extra__icon) { transform: rotate(45deg); }
+  .extra__field { margin-top: 8px; }
+
+  .lead__submit { width: 100%; min-height: 60px; font-size: 1.125rem; margin-top: 4px; }
+  .lead__fine { font-size: 0.875rem; color: var(--g4); }
+  .lead__status:empty { display: none; }
+  .lead__status { padding: 14px 16px; border: 1px solid var(--ink); font-weight: 500; }
+  .lead__status a { font-weight: 700; }
+
+  .lead__done { display: grid; gap: 12px; padding-block: 24px; }
+  .lead__done[hidden] { display: none; }
+  .lead__done-msg { font-family: var(--font-display); font-weight: 700; font-size: clamp(1.5rem, 1.2rem + 1.2vw, 2.25rem); line-height: 1.1; }
+</style>

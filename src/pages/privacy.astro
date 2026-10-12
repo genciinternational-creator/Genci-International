@@ -1,0 +1,117 @@
+---
+import Base from '../layouts/Base.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import MobileBar from '../components/MobileBar.astro';
+import Icon from '../components/Icon.astro';
+import { contact } from '../data/site.js';
+
+const updated = 'October 12, 2026';
+const ga4 = Boolean(import.meta.env.PUBLIC_GA4_ID);
+const pixel = Boolean(import.meta.env.PUBLIC_META_PIXEL_ID);
+const tools = [ga4 && 'Google Analytics', pixel && 'the Meta Pixel'].filter(Boolean).join(' and ');
+---
+<Base
+  title="Privacy Policy | GENCI"
+  description="How GENCI collects, uses and protects the information you send through the free sample edit form, by phone, text or email."
+  faqSchema={false}
+>
+  <Header home="/" />
+  <main id="main" class="policy">
+    <div class="policy__band on-dark">
+      <div class="wrap">
+        <h1 class="policy__title">Privacy policy</h1>
+        <p class="policy__date">Last updated {updated}</p>
+      </div>
+    </div>
+
+    <div class="wrap">
+    <div class="policy__body">
+      <section>
+        <h2>Who we are</h2>
+        <p>
+          GENCI is a video editing studio for home service businesses in the {contact.areaServed}. Questions about this
+          policy go to <a href={`mailto:${contact.email}`}>{contact.email}</a> or <a class="nobr" href={contact.tel}>{contact.phoneDisplay}</a>.
+        </p>
+      </section>
+
+      <section>
+        <h2>What we collect</h2>
+        <p>
+          When you fill out the free sample edit form, we receive your name, your type of business, your mobile number,
+          your email and, if you add one, a link to your footage. When you call, text or email us, we receive what you send.
+        </p>
+      </section>
+
+      <section>
+        <h2>How we use it</h2>
+        <p>
+          We use your information to reply about your free sample edit and our services, by text, email or phone, and to
+          deliver the videos you order. If you would rather not get texts, tell us and we will stop.
+        </p>
+      </section>
+
+      <section>
+        <h2>Who handles it</h2>
+        <p>
+          Form submissions reach us through Formspree, a form service. Our website host keeps basic server logs, such as IP
+          address and browser type, to run and secure the site. We do not sell or rent your personal information.
+        </p>
+        {tools ? (
+          <p>
+            We use {tools} to count visits and measure the results of our ads. These tools set cookies and receive data
+            such as the pages you view, your device type and whether you sent the form. You can block them in your browser
+            settings. This site does not respond to browser Do Not Track signals.
+          </p>
+        ) : (
+          <p>This site does not use cookies for advertising or analytics.</p>
+        )}
+      </section>
+
+      <section>
+        <h2>How long we keep it</h2>
+        <p>
+          We keep your information for as long as we need it to reply to you and work with you. To see, correct or delete
+          what we have, email <a href={`mailto:${contact.email}`}>{contact.email}</a>.
+        </p>
+      </section>
+
+      <section>
+        <h2>California residents</h2>
+        <p>
+          You can ask what personal information we have about you and ask us to delete it. We do not sell or share personal
+          information as those terms are defined under California law.
+        </p>
+      </section>
+
+      <section>
+        <h2>Children</h2>
+        <p>This site is for business owners. We do not knowingly collect information from children under 13.</p>
+      </section>
+
+      <section>
+        <h2>Changes</h2>
+        <p>When this policy changes, we will post the new version on this page with a new date.</p>
+      </section>
+
+      <a class="btn policy__back" href="/">
+        <span class="btn__text">Back to GENCI</span>
+        <span class="btn__sq"><Icon name="arrow-right" /></span>
+      </a>
+    </div>
+    </div>
+  </main>
+  <Footer />
+  <MobileBar />
+</Base>
+
+<style>
+  .policy__band { padding-block: clamp(40px, 6vw, 88px); }
+  .policy__title { font-size: clamp(2.25rem, 1.3rem + 4vw, 4.5rem); }
+  .policy__date { margin-top: 12px; color: var(--g2); }
+  .policy__body { display: grid; gap: 36px; padding-block: clamp(48px, 6vw, 96px); max-width: 68ch; }
+  .policy__body h2 { font-size: clamp(1.375rem, 1.1rem + 1vw, 1.875rem); margin-bottom: 10px; }
+  .policy__body p { color: var(--g4); max-width: 68ch; }
+  .policy__body a:not(.btn) { color: var(--ink); font-weight: 500; }
+  .policy__back { justify-self: start; }
+</style>

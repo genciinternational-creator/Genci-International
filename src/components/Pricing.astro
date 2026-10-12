@@ -1,0 +1,85 @@
+---
+import Icon from './Icon.astro';
+import { plans } from '../data/site.js';
+---
+<section class="price section on-dark" id="pricing" aria-labelledby="price-title">
+  <div class="wrap">
+    <div class="price__head">
+      <h2 id="price-title" class="h2">What it costs.</h2>
+      <p class="lede">Start with a free 30-second sample. Pick a plan when you want videos every month.</p>
+    </div>
+
+    <table class="fares">
+      <caption class="sr-only">Plans and prices</caption>
+      <thead>
+        <tr>
+          <th scope="col" class="label">Plan</th>
+          <th scope="col" class="label">What’s included</th>
+          <th scope="col" class="label fares__price-h">Price</th>
+        </tr>
+      </thead>
+      <tbody>
+        {plans.map((p) => (
+          <tr>
+            <th scope="row" class="fares__name">{p.name}</th>
+            <td class="fares__detail">
+              {p.items.length > 1 ? (
+                <ul class="fares__list" role="list">{p.items.map((item) => <li>{item}</li>)}</ul>
+              ) : (
+                <p>{p.items[0]}</p>
+              )}
+            </td>
+            <td class="fares__price">
+              {p.href ? (
+                <a class="btn btn--inverse btn--small fares__ask" href={p.href}>
+                  <span class="btn__text">{p.price}</span>
+                  <span class="btn__sq"><Icon name="arrow-right" /></span>
+                </a>
+              ) : (
+                <span class="fares__amount"><span class="syne">{p.price}</span>{p.per && <span class="fares__per">{p.per}</span>}</span>
+              )}
+              {p.note && <p class="fares__note">{p.note}</p>}
+            </td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<style>
+  .price__head { display: grid; gap: 20px; margin-bottom: clamp(32px, 4vw, 56px); }
+  @media (min-width: 1024px) {
+    .price__head { grid-template-columns: 7fr 5fr; align-items: end; column-gap: 32px; }
+  }
+
+  .fares { width: 100%; border-collapse: collapse; border-top: 1px solid var(--paper); }
+  .fares thead th { text-align: left; padding: 14px 16px 14px 0; color: var(--g2); border-bottom: 1px solid var(--g4); }
+  .fares tbody th, .fares td { text-align: left; vertical-align: top; padding: 22px 16px 22px 0; border-bottom: 1px solid var(--g4); }
+  .fares__name {
+    font-family: var(--font-display);
+    font-size: clamp(1.25rem, 1rem + 1vw, 1.875rem);
+    line-height: 1.1;
+    width: 30%;
+  }
+  .fares__detail { color: var(--g2); }
+  .fares__list { list-style: none; padding: 0; display: grid; gap: 8px; }
+  .fares__list li { position: relative; padding-left: 22px; }
+  .fares__list li::before { content: ''; position: absolute; left: 0; top: 0.6em; width: 10px; height: 2px; background: var(--paper); }
+  .fares__amount { display: inline-flex; align-items: baseline; gap: 4px; white-space: nowrap; }
+  .fares__per { font-size: 0.9375rem; color: var(--g2); }
+  .fares__note { margin-top: 10px; font-size: 0.9375rem; line-height: 1.4; color: var(--g2); }
+  .fares__ask { white-space: nowrap; }
+  .fares__ask:focus-visible { outline-color: var(--paper); }
+  .fares__price-h, .fares__price { text-align: right !important; padding-right: 0 !important; }
+  .fares__price .syne { font-size: clamp(1.75rem, 1.2rem + 2vw, 3rem); line-height: 1; font-variant-numeric: lining-nums tabular-nums; font-feature-settings: 'lnum' 1, 'tnum' 1; }
+
+  @media (max-width: 767.98px) {
+    .fares thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+    .fares, .fares tbody, .fares tr, .fares tbody th, .fares td { display: block; width: 100%; }
+    .fares tr { padding-block: 20px; border-bottom: 1px solid var(--g4); }
+    .fares tbody th, .fares td { padding: 0; border: 0; }
+    .fares__detail { margin-top: 8px; }
+    .fares__price { text-align: left !important; margin-top: 12px; }
+  }
+</style>

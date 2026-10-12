@@ -1,0 +1,7 @@
+node_modules/
+dist/
+.astro/
+.env
+# 4K originals stay local; the site ships the compressed files in public/videos
+video-sources/
+.impeccable/review/

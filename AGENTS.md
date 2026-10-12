@@ -32,6 +32,7 @@ Site da Genci, serviço de criação de conteúdo publicitário com IA voltado a
 - Fonte de títulos: TeX Gyre Adventor (escolha final, licença GUST em `public/fonts/licenses/`).
 - E-mail comercial: contact@genciinternational.com (já existe; ao mover o DNS para o Cloudflare, preservar os registros MX).
 - Publicação: GitHub + Cloudflare Pages (build `npm run build`, saída `dist`, variável `NODE_VERSION=22.12.0`). Passo a passo no `README.md`.
+- Para publicar: `npm run build` (confere se compila), commit e `git push origin main` para github.com/genciinternational-creator/Genci-International. O Cloudflare Pages publica sozinho em 1 a 2 minutos. O login do GitHub fica salvo no Windows (Git Credential Manager).
 - Rastreamento de anúncios opcional: variáveis `PUBLIC_GA4_ID` e `PUBLIC_META_PIXEL_ID` no Cloudflare. Vazias = nada carrega.
 - Contrato: Visual Growth mensal, sem fidelidade, cancela antes da próxima cobrança, cliente fica com os vídeos. Amostra grátis não tem revisões; planos têm 3 rodadas por vídeo.
 - Bloco "Who edits your videos" (`src/components/Founder.astro`): Guilherme Camargo, foto em `public/brand/founder.webp`, frase "Care in every detail."

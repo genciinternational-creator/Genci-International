@@ -1,7 +1,7 @@
 ---
 import '../styles/global.css';
 import Analytics from '../components/Analytics.astro';
-import { contact, faq, founder } from '../data/site.js';
+import { contact, faq, founder, plans } from '../data/site.js';
 
 interface Props {
   title: string;
@@ -18,6 +18,21 @@ const logo = site ? new URL('/brand/genci-logo.png', site).href : '/brand/genci-
 
 const businessId = site ? new URL('/#business', site).href : '#business';
 
+// The priced plans as offers ("Free" is 0; the custom proposal has no set price).
+const offers = plans
+  .filter((p) => p.price && p.service)
+  .map((p) => ({
+    '@type': 'Offer',
+    name: p.name,
+    priceSpecification: {
+      '@type': 'UnitPriceSpecification',
+      price: p.price === 'Free' ? 0 : Number(p.price.replace(/\D/g, '')),
+      priceCurrency: 'USD',
+      ...(p.per && { unitText: 'MONTH' }),
+    },
+    itemOffered: { '@type': 'Service', name: p.service, areaServed: { '@type': 'Place', name: contact.areaServed } },
+  }));
+
 // One graph: the business, the site (once the domain is known) and the visible FAQ.
 const graph = [
   {
@@ -25,10 +40,12 @@ const graph = [
     '@id': businessId,
     name: 'GENCI',
     description:
-      'Video editing studio that turns raw phone footage from local service businesses into short, ready-to-post videos for Instagram Reels, TikTok, YouTube Shorts, Facebook and Google ads.',
+      'GENCI edits raw phone footage from home service businesses into short videos and runs them as Facebook and Instagram ads, replacing the ads that do not bring calls.',
     telephone: contact.phoneSchema,
     email: contact.email,
     areaServed: { '@type': 'Place', name: contact.areaServed },
+    knowsAbout: ['Short video editing', 'Facebook and Instagram ad management'],
+    hasOfferCatalog: { '@type': 'OfferCatalog', name: 'GENCI plans', itemListElement: offers },
     ...(founder.name && { founder: { '@type': 'Person', name: founder.name, jobTitle: founder.role } }),
     ...(site && { url: site.href, logo, image: ogImage }),
   },
@@ -65,9 +82,12 @@ const schema = { '@context': 'https://schema.org', '@graph': graph };
     <meta property="og:image" content={ogImage} />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content="GENCI: short videos edited from job-site phone clips" />
+    <meta property="og:image:alt" content="GENCI: short video ads edited from job-site phone clips" />
     <meta property="og:locale" content="en_US" />
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
 
     <script type="application/ld+json" set:html={JSON.stringify(schema)} />
     <Analytics />

@@ -7,7 +7,7 @@ const year = new Date().getFullYear();
   <div class="wrap foot__grid">
     <Logo variant="full" title="GENCI International" class="foot__logo" />
     <div class="foot__col">
-      <p class="label foot__label">Video editing for home service businesses</p>
+      <p class="label foot__label">Video ads for home service businesses</p>
       <p>Serving the {contact.areaServed}.</p>
       <p>Captions adapted to your customers’ language.</p>
     </div>
@@ -16,7 +16,7 @@ const year = new Date().getFullYear();
       <p><a class="nobr" href={contact.tel}>{contact.phoneDisplay}</a></p>
       <p><a href={contact.mailto}>{contact.email}</a></p>
     </div>
-    <p class="foot__copy">© {year} GENCI. All rights reserved. <a href="/privacy/">Privacy policy</a></p>
+    <p class="foot__copy">© {year} GENCI. All rights reserved. <a href="/privacy/">Privacy policy</a> <a href="/terms/">Terms of service</a></p>
   </div>
 </footer>
 
@@ -27,8 +27,8 @@ const year = new Date().getFullYear();
   .foot__col { display: grid; gap: 4px; align-content: start; color: var(--g4); }
   .foot__label { color: var(--ink); margin-bottom: 8px; }
   .foot__col a { color: var(--ink); font-weight: 500; }
-  .foot__copy { font-size: 0.875rem; color: var(--g4); padding-top: 24px; border-top: 1px solid var(--g2); }
-  .foot__copy a { margin-left: 12px; color: var(--ink); }
+  .foot__copy { display: flex; flex-wrap: wrap; align-items: center; column-gap: 16px; font-size: 0.875rem; color: var(--g4); padding-top: 24px; border-top: 1px solid var(--g2); }
+  .foot__copy a { display: inline-flex; align-items: center; min-height: 44px; color: var(--ink); }
   @media (min-width: 900px) {
     .foot__grid { grid-template-columns: 4fr 4fr 4fr; align-items: start; }
     .foot__copy { grid-column: 1 / -1; }

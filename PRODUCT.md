@@ -18,7 +18,7 @@ Traffic is mixed (direct outreach, Instagram/Facebook, Google), so the page must
 
 ## Product Purpose
 
-GENCI is a video editing studio. Owners film raw clips on their phone during a job and send them; GENCI turns them into short, ready-to-post vertical videos for Instagram Reels, TikTok, YouTube Shorts, Facebook and Google ads. Success for the site is one action: the owner requests a free sample edit.
+GENCI turns owners’ phone clips into short videos and, on the Lead Engine plan, runs them as Facebook and Instagram ads: it checks the numbers every week and replaces the ads that are not bringing calls. Owners film raw clips during a job and send them. Success for the site is one action: the owner requests a free sample edit (the form also records the plan they are interested in).
 
 ## Positioning
 
@@ -32,8 +32,8 @@ Owners already shoot before/after photos and clips on their phones at job sites.
 
 - Serves the San Francisco Bay Area. Never claim an office, a street address, or that the team is located there. Schema uses `areaServed` only.
 - Language: adapted per client. Never claim fluency in any language.
-- Contract: Visual Growth is month to month, billed in advance, no long-term commitment; cancel anytime before the next billing date; the client keeps every delivered video. The free sample has no revisions.
-- Offer: free 30-second sample edit; "Visual Growth" plan at $360 a month (8 edited videos and 10 graphics a month, ready-to-post captions, posting calendar and guidance); custom proposals on request; the client chooses the format; 4 business days turnaround; 3 rounds of changes on each plan video before final delivery; requests answered daily.
+- Contract: Visual Growth and Lead Engine are month to month, billed in advance, no long-term commitment; cancel anytime before the next billing date; the client keeps every delivered video. The free sample has no revisions.
+- Offer: free 30-second sample edit; "Visual Growth" plan at $360 a month (8 edited videos and 10 graphics a month, ready-to-post captions, posting calendar and guidance); "Lead Engine" at $997 a month (everything in Visual Growth plus Facebook and Instagram ad setup and management, weekly testing, weak ads replaced with new versions, a one-page monthly report in plain English) plus ad spend paid by the client directly to Meta, recommended from $900 a month (minimum $600), one-time setup $297, non-refundable once setup starts; the client owns the ad account and card, GENCI works as a partner in their Business Manager and never advances ad spend; no guaranteed leads, sales or cost per lead, only the work; custom proposals on request (more videos, Google Ads, several service areas); the client chooses the format; 4 business days turnaround; 3 rounds of changes on each plan video before final delivery; requests answered daily.
 - Detailed marketing context lives in `.claude/product-marketing.md`.
 
 ## Brand Commitments
@@ -54,7 +54,7 @@ Owners already shoot before/after photos and clips on their phones at job sites.
 
 1. Talk in the owner's outcomes: calls, quotes, booked jobs.
 2. The work is the proof. Real before/after footage outranks any claim.
-3. Ask for as little as possible: one action, four fields.
+3. Ask for as little as possible: one action, four required fields (the plan comes pre-selected; the two ad questions are optional).
 4. Honest gaps over invented proof: if a fact is missing, leave it out and ask the owner.
 5. Phone first: the owner reads this between jobs.
 

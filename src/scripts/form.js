@@ -13,6 +13,7 @@ const rules = {
   business_type: (v) => (v ? '' : 'Choose your type of business.'),
   mobile: (v) => (digits(v).length === 10 ? '' : 'Enter a 10-digit US mobile number, like (510) 555-0123.'),
   email: (v) => (/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v.trim()) ? '' : 'Enter an email address, like you@yourbusiness.com.'),
+  plan: (v) => (v ? '' : 'Choose the plan you’re interested in.'),
   footage_link: (v) => {
     if (!v.trim()) return '';
     try {
@@ -35,6 +36,19 @@ export function initForm() {
 
   const fieldOf = (name) => form.elements.namedItem(name);
   const errOf = (input) => document.getElementById(`${input.id}-err`);
+
+  // Plan field: set by the pricing buttons (data-plan) or by ?plan=lead-engine in a link or ad URL.
+  const plan = form.querySelector('[data-plan-field]');
+  const subject = form.elements.namedItem('_subject');
+  const selectPlan = (id) => {
+    const option = [...plan.options].find((o) => o.dataset.planId === id);
+    if (option) plan.value = option.value;
+  };
+  document.addEventListener('click', (event) => {
+    const link = event.target.closest('a[data-plan]');
+    if (link) selectPlan(link.dataset.plan);
+  });
+  selectPlan(new URLSearchParams(location.search).get('plan'));
 
   const check = (name) => {
     const input = fieldOf(name);
@@ -88,6 +102,10 @@ export function initForm() {
 
     const link = fieldOf('footage_link');
     if (link.value.trim() && !/^https?:\/\//i.test(link.value.trim())) link.value = `https://${link.value.trim()}`;
+
+    // The email subject names the plan, so paid-plan leads stand out in the inbox.
+    const chosen = plan.selectedOptions[0];
+    subject.value = chosen.dataset.planId === 'sample' ? 'Free sample edit request' : `${chosen.textContent} request`;
 
     setLoading(true);
     try {

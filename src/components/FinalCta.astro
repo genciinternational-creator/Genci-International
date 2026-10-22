@@ -1,6 +1,6 @@
 ---
 import Icon from './Icon.astro';
-import { contact, businessTypes } from '../data/site.js';
+import { contact, businessTypes, planChoices, adsNowChoices, adBudgetChoices } from '../data/site.js';
 
 // PUBLIC_FORMSPREE_ENDPOINT can point the form elsewhere; without it the live GENCI form is used,
 // so a deploy without the .env file still sends leads.
@@ -59,6 +59,41 @@ const endpoint = import.meta.env.PUBLIC_FORMSPREE_ENDPOINT || 'https://formspree
           <label class="field__label" for="f-email">Email</label>
           <input class="field__input" id="f-email" name="email" type="email" autocomplete="email" placeholder="you@yourbusiness.com" required aria-describedby="f-email-err" />
           <p class="field__err" id="f-email-err" data-err></p>
+        </div>
+
+        <div class="field">
+          <label class="field__label" for="f-plan">Plan you’re interested in</label>
+          <div class="field__select">
+            <select class="field__input" id="f-plan" name="plan" required aria-describedby="f-plan-err" data-plan-field>
+              {planChoices.map((c, i) => <option value={c.value} data-plan-id={c.id} selected={i === 0}>{c.label}</option>)}
+            </select>
+            <Icon name="arrow-down" class="field__chev" />
+          </div>
+          <p class="field__err" id="f-plan-err" data-err></p>
+        </div>
+
+        <div class="field-pair">
+          <div class="field">
+            <label class="field__label" for="f-ads">Are you running ads now? <span class="field__opt">Optional</span></label>
+            <div class="field__select">
+              <select class="field__input" id="f-ads" name="ads_now">
+                <option value="" selected>Choose one</option>
+                {adsNowChoices.map((c) => <option value={c}>{c}</option>)}
+              </select>
+              <Icon name="arrow-down" class="field__chev" />
+            </div>
+          </div>
+
+          <div class="field">
+            <label class="field__label" for="f-budget">Monthly ad budget <span class="field__opt">Optional</span></label>
+            <div class="field__select">
+              <select class="field__input" id="f-budget" name="ad_budget">
+                <option value="" selected>Choose one</option>
+                {adBudgetChoices.map((c) => <option value={c}>{c}</option>)}
+              </select>
+              <Icon name="arrow-down" class="field__chev" />
+            </div>
+          </div>
         </div>
 
         <details class="extra">
@@ -127,7 +162,7 @@ const endpoint = import.meta.env.PUBLIC_FORMSPREE_ENDPOINT || 'https://formspree
   @media (min-width: 640px) { .ticket { margin-inline: 0; } }
   .ticket ::selection { background: var(--ink); color: var(--paper); }
 
-  .lead { display: grid; gap: 18px; }
+  .lead { display: grid; gap: 18px; container: lead / inline-size; }
   .lead__trap { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
 
   .field { display: grid; gap: 6px; }
@@ -147,6 +182,12 @@ const endpoint = import.meta.env.PUBLIC_FORMSPREE_ENDPOINT || 'https://formspree
   .field__input:hover { background: var(--g1); }
   .field__input:focus-visible { outline: 3px solid var(--ink); outline-offset: 2px; }
   .field__input[aria-invalid='true'] { border-width: 2px; border-style: dashed; }
+  .field__opt { margin-left: 6px; font-weight: 500; color: var(--g4); text-transform: none; letter-spacing: 0.02em; }
+  /* The two ad questions sit side by side only when the ticket is wide enough for their labels. */
+  .field-pair { display: grid; gap: 18px; }
+  @container lead (min-width: 600px) {
+    .field-pair { grid-template-columns: 1fr 1fr; gap: 16px; align-items: end; }
+  }
   .field__select { position: relative; }
   .field__select select { padding-right: 48px; }
   .field__select :global(.field__chev) { position: absolute; right: 16px; top: 50%; width: 18px; height: 18px; transform: translateY(-50%); pointer-events: none; }

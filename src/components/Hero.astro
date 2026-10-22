@@ -8,18 +8,19 @@ import Icon from './Icon.astro';
     <div class="hero__copy on-dark">
       <span class="pict hero__pict"><Icon name="arrow-down" /></span>
       <h1 id="hero-title" class="hero__title">
-        You film the job. We turn it into videos that bring in <span class="syne">quotes.</span>
+        You film the job. We turn it into ads that bring in <span class="syne">quotes</span>, and we run them for you.
       </h1>
       <p class="hero__sub">
         For house cleaning, remodeling and carpet cleaning companies across the Bay Area. Send the clips from your
-        phone. Get back short videos ready to post and run as ads.
+        phone. We edit them, run them on Facebook and Instagram, and replace what isn’t bringing calls.
       </p>
     </div>
 
     <ol class="route" aria-label="How it works">
       <li class="route__sign"><span class="num">1</span><span>Send us your phone clips</span></li>
-      <li class="route__sign"><span class="num">2</span><span>We edit them into short videos</span></li>
-      <li class="route__sign"><span class="num">3</span><span>You post them and run them as ads</span></li>
+      <li class="route__sign"><span class="num">2</span><span>We edit them into short ads</span></li>
+      <li class="route__sign"><span class="num">3</span><span>We run them on Facebook and Instagram</span></li>
+      <li class="route__sign"><span class="num">4</span><span>We replace what isn’t bringing calls</span></li>
     </ol>
 
     <div class="gate on-dark">
@@ -59,9 +60,10 @@ import Icon from './Icon.astro';
     position: relative;
     isolation: isolate;
     display: grid;
-    /* Phones and tablets: the reel sits beside the route signs, so a playing video is in the first screen. */
+    /* Phones and tablets: the gate follows the headline so the button stays in the first screen with the
+       longer Lead Engine copy; the reel sits beside the route signs right under it and starts playing in view. */
     grid-template-columns: clamp(118px, 34vw, 210px) minmax(0, 1fr);
-    grid-template-areas: 'copy copy' 'mon route' 'gate gate';
+    grid-template-areas: 'copy copy' 'gate gate' 'mon route';
     column-gap: 14px;
   }
   .hero__ground {
@@ -80,7 +82,8 @@ import Icon from './Icon.astro';
   .hero__title {
     font-size: clamp(2.125rem, 1.25rem + 3.9vw, 5.5rem);
     line-height: 1.03;
-    max-width: 15ch;
+    /* 20ch keeps the four-clause headline to four lines on desktop, so the route and gate stay in the first screen. */
+    max-width: 20ch;
   }
   .hero__title .syne { font-size: 1em; letter-spacing: -0.02em; }
   .hero__sub {
@@ -200,7 +203,7 @@ import Icon from './Icon.astro';
     .hero__cap { position: static; width: auto; height: auto; overflow: visible; clip: auto; white-space: normal; margin-top: 10px; color: var(--g2); }
     .route {
       display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
+      grid-template-columns: repeat(4, minmax(0, 1fr));
       grid-auto-rows: auto;
       margin-block: 0;
       border-top: 0;

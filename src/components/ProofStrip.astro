@@ -1,7 +1,7 @@
 ---
 import { highlights } from '../data/site.js';
 
-// Word marks repeat their title, so only numeric marks are read aloud.
+// A word mark ("Weekly") is set smaller inside the same line box, so every title still starts on one line.
 const isNumber = (mark) => /\d/.test(mark);
 ---
 <section class="proof" aria-labelledby="proof-title">
@@ -10,7 +10,7 @@ const isNumber = (mark) => /\d/.test(mark);
     <ul class="hl-row" role="list">
       {highlights.map((h) => (
         <li class="hl">
-          <span class="hl__mark syne" aria-hidden={isNumber(h.mark) ? undefined : 'true'}>{h.mark}</span>
+          <span class="hl__mark syne">{isNumber(h.mark) ? h.mark : <span class="hl__word">{h.mark}</span>}</span>
           <h3 class="hl__title">{h.title}</h3>
           <p class="hl__text">{h.text}</p>
         </li>
@@ -45,6 +45,9 @@ const isNumber = (mark) => /\d/.test(mark);
     letter-spacing: -0.02em;
     white-space: nowrap;
   }
+  /* Syne is wide: a word runs about 6em, so it is also capped by the column width. */
+  .hl { container-type: inline-size; }
+  .hl__word { font-size: min(0.68em, 15.5cqi); letter-spacing: -0.03em; }
   .hl__title {
     grid-area: title;
     font-size: clamp(1.0625rem, 1rem + 0.35vw, 1.3125rem);

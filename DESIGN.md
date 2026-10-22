@@ -125,7 +125,7 @@ A monochrome sign palette: one ink, one white, four fixed grays, and nothing bet
 **Character:** Avant Garde's wide geometric letters do the speaking, like a sign face read from a distance. Outfit stays quiet for reading. Syne is the stamp: labels, numerals and at most one highlighted word per heading.
 
 ### Hierarchy
-- **Display** (700, clamp(2.125rem, 1.25rem + 3.9vw, 5.5rem), 1.03): the hero sign only. Max 15ch.
+- **Display** (700, clamp(2.125rem, 1.25rem + 3.9vw, 5.5rem), 1.03): the hero sign only. Max 20ch (the Lead Engine headline runs four clauses; 20ch keeps it to four lines on desktop).
 - **Headline** (700, clamp(2rem, 1.2rem + 3.4vw, 4.25rem), 1.02): one per section. Max 18ch.
 - **Title** (700, clamp(1.5rem, 1.1rem + 1.6vw, 2.5rem), 1.05): step signs, the niche copy line, the gate message.
 - **Body** (400, 1.0625rem, 1.55): copy and answers, 46 to 64ch.
@@ -179,7 +179,8 @@ A 9:16 frame with a graphite border. A lazy WebP poster shows first; a white pla
 ### Do:
 - **Do** end every action in a square arrow pictogram that points where it goes.
 - **Do** keep one message per sign and one sign per section.
-- **Do** set step and count numbers in Syne 800 with lining figures inside ink squares, and use a big number only when it is a real fact (4 business days, 9:16, 3 rounds, 8 videos).
+- **Do** set step and count numbers in Syne 800 with lining figures inside ink squares, and use a big number only when it is a real fact (4 business days, 9:16, 8 videos). A word mark ("Weekly") sits in the same line box at 0.68em, capped by the column width.
+- **Do** mark the featured plan (Lead Engine) as the one white row on the ink price table, with an ink "Most complete" tag after the plan name, never above it.
 - **Do** keep posters lazy, videos `preload="none"`, muted and `playsinline`.
 - **Do** respect reduced motion: every animated state has a visible static default.
 

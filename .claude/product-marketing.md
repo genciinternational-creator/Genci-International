@@ -6,7 +6,7 @@ Never invent facts on the site; if something is unknown, ask the owner.
 ## Product
 
 - **Name:** GENCI (full lockup in the logo: Genci International).
-- **What it is:** a video editing studio. We turn raw phone footage from local service businesses into short, ready-to-post videos.
+- **What it is:** we turn raw phone footage from local service businesses into short videos and, on Lead Engine, run them as Facebook and Instagram ads, check them every week and replace the ones not bringing calls.
 - **Where the videos run:** Instagram Reels, TikTok, YouTube Shorts, Facebook, Google ads.
 - **Mechanism:** the owner films on their phone during a job and sends the clips. GENCI edits them into vertical videos the owner can post or run as ads.
 - **Differentiator:** the owner only films and sends; every edit is built to bring calls and quotes (service, area and phone number clear, before and after up front).
@@ -37,12 +37,16 @@ Never invent facts on the site; if something is unknown, ask the owner.
 - **Button text (everywhere):** "Get my free sample edit".
 - **Free sample:** one 30-second video edited from the owner's footage.
 - **Plan "Visual Growth":** 8 edited videos a month; 10 graphics to promote services, reviews and offers; ready-to-post captions; a posting calendar plus guidance on how to use the content. Price: $360 a month.
-- **Custom proposals:** available on request.
+- **Plan "Lead Engine" (featured, "Most complete"):** everything in Visual Growth, plus Facebook and Instagram ad setup and management, weekly testing, weak ads replaced with new versions, a one-page monthly report in plain English. $997 a month plus ad spend paid directly to Meta. Recommended ad spend from $900 a month (minimum $600). One-time setup $297. Month to month.
+- **Ad account:** the client owns the account and the card; GENCI works inside it as a partner and never advances ad spend.
+- **Results:** never promise leads, sales or cost per lead. Promise the process: test, measure, replace.
+- **Founding client offer (off by default):** Lead Engine at $697 a month for the first 90 days, setup waived, limited to 3 businesses. Toggle `foundingOffer.enabled` in `src/data/site.js`.
+- **Custom proposals:** more videos, Google Ads or several service areas.
 - **Formats:** the client asks for the format they want.
 - **Turnaround:** 4 business days.
 - **Revisions:** 3 rounds of changes on each video, before final delivery.
 - **Lead response:** GENCI answers requests every day.
-- **Contract:** month to month, billed in advance, no long-term commitment. Cancel anytime before the next billing date. The client keeps every delivered video. The free sample has no revisions.
+- **Contract:** both plans month to month, billed in advance, no long-term commitment. Cancel anytime before the next billing date. The client keeps every delivered video. The free sample has no revisions.
 - **Upsell, quiet:** "Need a website too? Ask us." (FAQ only.)
 
 ## Proof on hand

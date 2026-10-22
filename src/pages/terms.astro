@@ -1,0 +1,89 @@
+---
+import Policy from '../layouts/Policy.astro';
+import { contact } from '../data/site.js';
+
+const updated = 'October 22, 2026';
+---
+<Policy
+  title="Terms of Service | GENCI"
+  description="GENCI's terms for the free sample edit and the Visual Growth and Lead Engine plans: billing, ad account access, ad spend, setup fee, results and cancellation."
+  heading="Terms of service"
+  updated={updated}
+>
+  <section>
+    <h2>These terms</h2>
+    <p>
+      These terms cover GENCI’s free sample edit and our monthly plans, Visual Growth and Lead Engine. By ordering a
+      plan, you agree to them. Questions go to <a href={`mailto:${contact.email}`}>{contact.email}</a> or
+      <a class="nobr" href={contact.tel}>{contact.phoneDisplay}</a>.
+    </p>
+  </section>
+
+  <section>
+    <h2>What each plan includes</h2>
+    <p>
+      Each plan includes what is listed in our <a href="/#pricing">pricing</a> when you sign up. The free sample edit
+      is one 30-second video and does not include rounds of changes. Every video in a plan gets 3 rounds of changes
+      before final delivery.
+    </p>
+  </section>
+
+  <section>
+    <h2>Billing</h2>
+    <p>
+      Plans are billed monthly, in advance, in US dollars. Your GENCI fee covers the videos and, on Lead Engine, the
+      management of your ads.
+    </p>
+  </section>
+
+  <section>
+    <h2>Your ad account</h2>
+    <p>
+      On Lead Engine, you own the Facebook and Instagram ad account and the card that pays for it. GENCI joins your
+      Meta Business Manager as a partner to set up and manage your campaigns. GENCI never pays or advances ad spend on
+      your behalf.
+    </p>
+  </section>
+
+  <section>
+    <h2>Ad spend</h2>
+    <p>
+      You pay for your ads directly to Meta, with your own card. Ad spend is separate from your GENCI monthly fee and is
+      not included in any plan price.
+    </p>
+  </section>
+
+  <section>
+    <h2>Lead Engine setup fee</h2>
+    <p>
+      Lead Engine has a one-time setup fee of $297. It is not refundable once we have started setting up your account
+      and campaigns.
+    </p>
+  </section>
+
+  <section>
+    <h2>No guaranteed results</h2>
+    <p>
+      We do not guarantee a number of leads, a number of sales or a cost per lead. What we guarantee is the work
+      described in your plan. On Lead Engine, that means new videos every month, weekly checks of your ads and weak ads
+      replaced with new versions.
+    </p>
+  </section>
+
+  <section>
+    <h2>Cancellation</h2>
+    <p>
+      Plans are month to month, with no long-term contract. You can cancel anytime before your next billing date by
+      emailing <a href={`mailto:${contact.email}`}>{contact.email}</a> or texting
+      <a class="nobr" href={contact.sms}>{contact.phoneDisplay}</a>.
+    </p>
+    <p>
+      When you cancel, the ad account, the ads and every video we delivered stay with you.
+    </p>
+  </section>
+
+  <section>
+    <h2>Changes</h2>
+    <p>When these terms change, we will post the new version on this page with a new date.</p>
+  </section>
+</Policy>

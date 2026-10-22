@@ -68,11 +68,11 @@ export const niches = [
   },
 ];
 
-// Four service highlights, each backed by a real number.
+// Four service highlights, each backed by a real fact.
 export const highlights = [
   { mark: '4', title: 'Business days', text: 'From the clips you send to a finished video. You film. We handle the edit.' },
   { mark: '9:16', title: 'Vertical first', text: 'Built for Reels, TikTok and YouTube Shorts. Need another format? Just ask.' },
-  { mark: '3', title: 'Rounds of changes', text: 'Dynamic cuts, captions and motion graphics in every edit, with 3 rounds of changes on each plan video.' },
+  { mark: 'Weekly', title: 'Ad check-ins', text: 'Every week we look at the numbers and replace the ad that isn’t working. Included in Lead Engine.' },
   { mark: '8', title: 'Videos a month', text: 'Ready to post or run as ads on Instagram, Facebook, TikTok, YouTube and Google. Included in Visual Growth.' },
 ];
 
@@ -85,32 +85,65 @@ export const included = [
   { label: 'Turnaround', text: '4 business days from your clips to the finished video.' },
 ];
 
+// id: the plan's key in links (?plan=lead-engine) and on the form's plan field.
+// service: what the plan sells, for the structured data in Base.astro.
 export const plans = [
   {
+    id: 'sample',
     name: 'Sample edit',
-    items: ['One 30-second video edited from your own footage, so you can judge our work before you pay. Changes start with a plan.'],
+    service: 'Sample video edit',
+    items: ['One 30-second video edited from your own footage.'],
     price: 'Free',
+    cta: 'Get my free sample edit',
   },
   {
+    id: 'visual-growth',
     name: 'Visual Growth',
+    service: 'Short video editing',
     items: [
       '8 edited videos a month',
-      '10 graphics to promote your services, reviews and offers',
+      '10 graphics',
       'Ready-to-post captions',
-      'A posting calendar, plus guidance on how to use each piece',
-      '3 rounds of changes on each video before final delivery',
+      'A posting calendar',
+      '3 rounds of changes on each video',
     ],
     price: '$360',
     per: '/month',
-    note: '$45 per video. Month to month, cancel anytime.',
+    note: '$45 per video. Month to month.',
+    cta: 'Choose Visual Growth',
   },
   {
+    id: 'lead-engine',
+    name: 'Lead Engine',
+    service: 'Facebook and Instagram ad management',
+    badge: 'Most complete',
+    lead: 'Everything in Visual Growth, plus:',
+    items: [
+      'Facebook and Instagram ad setup and management',
+      'Weekly testing',
+      'Weak ads replaced with new versions',
+      'A one-page monthly report in plain English',
+    ],
+    price: '$997',
+    per: '/month',
+    plus: '+ ad spend paid directly to Meta',
+    note: 'Recommended ad spend from $900/month. One-time setup $297. Month to month.',
+    cta: 'Choose Lead Engine',
+  },
+  {
+    id: 'custom',
     name: 'Custom proposal',
-    items: ['Need more videos or a different mix? We’ll put together a proposal for your business.'],
-    price: 'Request a proposal',
-    href: '#sample',
+    items: ['More videos, Google Ads or several service areas.'],
+    cta: 'Request a proposal',
   },
 ];
+
+// Strip above the prices. Switch `enabled` to true to show it, false to hide it.
+export const foundingOffer = {
+  enabled: false,
+  label: 'Founding client offer',
+  text: 'Lead Engine at $697/month for the first 90 days. Setup fee waived. Limited to 3 businesses.',
+};
 
 export const faq = [
   {
@@ -131,11 +164,31 @@ export const faq = [
   },
   {
     q: 'How much does it cost?',
-    a: 'The 30-second sample edit is free. Visual Growth is $360 a month, which works out to $45 per video, plus 10 graphics. Need something different? Ask us for a custom proposal.',
+    a: 'The 30-second sample edit is free. Visual Growth is $360 a month, which works out to $45 per video, plus 10 graphics. Lead Engine is $997 a month plus a one-time $297 setup. Ad spend is separate and goes straight to Meta. Need something different? Ask us for a custom proposal.',
   },
   {
-    q: 'Do I have to sign a long contract?',
-    a: 'No. Visual Growth is billed month to month, and you can cancel anytime before your next billing date. Every video we deliver is yours to keep.',
+    q: 'Is ad spend included?',
+    a: 'No. You pay Facebook and Instagram directly with your own card, so you always see exactly what you spend. Our fee covers the videos and the management.',
+  },
+  {
+    q: 'How much should I spend on ads?',
+    a: 'We recommend starting at $900 to $1,500 a month. The minimum we work with is $600 a month.',
+  },
+  {
+    q: 'Who owns the ad account?',
+    a: 'You do. We work inside your account as a partner. If you cancel, the account, the ads and every video stay with you.',
+  },
+  {
+    q: 'How fast will I see results?',
+    a: 'Facebook usually needs 2 to 4 weeks to learn who responds to your ads. We test from week one and tell you what we’re changing and why.',
+  },
+  {
+    q: 'Do you guarantee leads?',
+    a: 'No honest agency can guarantee a number. What we guarantee is the work: new videos every month, weekly checks and weak ads replaced with better versions.',
+  },
+  {
+    q: 'Do I have to sign a contract?',
+    a: 'No. Both plans are month to month. Cancel anytime before your next billing date.',
   },
   {
     q: 'Can the videos be in Spanish?',
@@ -154,4 +207,16 @@ export const businessTypes = [
   'Painting',
   'Junk removal',
   'Other',
+];
+
+// Form questions about ads. The values are what the Formspree email shows.
+export const adsNowChoices = ['Yes', 'No', 'I tried before'];
+export const adBudgetChoices = ['Not sure', 'Under $600', '$600 to $1,500', '$1,500+'];
+
+// Plan field on the form: `id` matches plans[].id and ?plan= in links, `value` is what the email shows.
+export const planChoices = [
+  { id: 'sample', value: 'Sample edit', label: 'Free sample edit' },
+  { id: 'visual-growth', value: 'Visual Growth', label: 'Visual Growth' },
+  { id: 'lead-engine', value: 'Lead Engine', label: 'Lead Engine' },
+  { id: 'custom', value: 'Custom', label: 'Custom proposal' },
 ];
